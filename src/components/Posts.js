@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Post from './Post';
 
+// TODO: PropTypes
 class Posts extends Component {
   componentDidMount () {
     this.props.fetchAllPosts();
@@ -10,7 +11,8 @@ class Posts extends Component {
   render () {
     return (
       <div>
-        <h3>Test!</h3>
+        <h3>All Posts</h3>
+        <hr />
         {this.props.posts.map(post => <Post key={post.id} post={post} />)}
       </div>
     );
