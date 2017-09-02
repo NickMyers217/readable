@@ -1,2 +1,6 @@
 GET http://localhost:5001/posts
 Authorization: thisisatest
+
+
+GET http://localhost:5001/categories
+Authorization: thisisatest
