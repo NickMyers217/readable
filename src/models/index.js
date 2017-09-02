@@ -1,5 +1,4 @@
 import * as uuid from 'uuid';
-import * as moment from 'moment';
 
 /**
  * A constructor function for a Post object
@@ -9,8 +8,8 @@ import * as moment from 'moment';
  * @param {String} category 
  */
 const Post = function (title, body, author, category) {
-  this.id = `Post-${uuid()}`;
-  this.timestamp = moment().format();
+  this.id = `${uuid()}`;
+  this.timestamp = Date.now();
   this.title = title;
   this.body = body;
   this.author = author;
