@@ -6,6 +6,7 @@
 export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECIEVE_POSTS = 'RECIEVE_POSTS';
 export const REQUEST_POSTS_ERROR = 'REQUEST_POSTS_ERROR';
+export const UPDATE_CATEGORY_AND_TITLE = 'UPDATE_CATEGORY_AND_TITLE';
 
 export const requestPosts = () => ({
   type: REQUEST_POSTS
@@ -31,3 +32,9 @@ export const fetchAllPosts = () => dispatch => {
     .then(json => dispatch(recievePosts(json)))
     .catch(err => dispatch(requestPostsError(err)));
 };
+
+export const updateCategoryAndTitle = (category, title) => ({
+  type: UPDATE_CATEGORY_AND_TITLE,
+  category,
+  title
+});

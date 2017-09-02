@@ -3,12 +3,15 @@
 import {
   REQUEST_POSTS,
   RECIEVE_POSTS,
-  REQUEST_POSTS_ERROR
+  REQUEST_POSTS_ERROR,
+  UPDATE_CATEGORY_AND_TITLE
 } from '../actions';
 
 const initialPostsState = {
   isFetching: false,
   isError: false,
+  category: null,
+  title: 'All Posts',
   posts: []
 };
 
@@ -34,6 +37,12 @@ export const postsReducer = (state = initialPostsState, action) => {
         isError: true,
         error: action.error,
         erroredAt: action.erroredAt
+      };
+    case UPDATE_CATEGORY_AND_TITLE:
+      return {
+        ...state,
+        category: action.category,
+        title: action.title
       };
     default:
       return state;

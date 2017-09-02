@@ -2,12 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Posts from '../components/Posts';
-import {fetchAllPosts} from '../actions';
+import {fetchAllPosts, updateCategoryAndTitle} from '../actions';
 
 const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
   fetchAllPosts: () => {
     dispatch(fetchAllPosts());
+  },
+  updateCategoryAndTitle: (category, title) => {
+    dispatch(updateCategoryAndTitle(category, title));
   }
 });
 
