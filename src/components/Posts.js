@@ -1,29 +1,37 @@
 import React from 'react';
 
 import Post from './Post';
+import Categories from './Categories';
 
 // TODO: PropTypes
 class Posts extends React.Component {
   componentDidMount () {
     const params = this.props.match.params;
+    const category = params.category ? params.category : null;
+    const title = category ? `Posts for ${category}` : 'All Posts';
 
     this.props.fetchAllPosts();
-
-    if (params.category && params.category !== this.props.category) {
-      let category = params.category ? params.category : null;
-      let title = category ? `Posts for ${category}` : 'All Posts';
-      this.props.updateCategoryAndTitle(category, title);
-    }
+    this.props.updateCategoryAndTitle(category, title);
   }
 
-  // TODO: Implement the categories list component
-  // TODO: Implement filtering
+  getPostsFilteredByCategory () {
+    const {category} = this.props;
+    return this.props.posts.filter(post => (
+      category === null || post.category === category
+    ));
+  }
+
+  // TODO: Implement sorting
   render () {
     return (
-      <div className='container'>
-        <h3>{this.props.title}</h3>
+      <div>
+        <h4>{this.props.title}</h4>
         <hr />
-        {this.props.posts.map(post => <Post key={post.id} post={post} />)}
+        {this.getPostsFilteredByCategory().length > 0
+          ? this.getPostsFilteredByCategory().map(post => (
+            <Post key={post.id} post={post} />
+          ))
+          : <h5 className='text text-secondary'>There are no posts in this category :(</h5>}
       </div>
     );
   }
