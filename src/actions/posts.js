@@ -25,6 +25,19 @@ export const updateCategoryAndTitle = (category, title) => ({
   title
 });
 
+const fetchPostCommentsAndAddToPost = post => {
+  const endpoint = `posts/${post.id}/comments`;
+  const headers = {headers: {'Authorization': 'thisisatest'}};
+
+  // TODO: Have some utility/config for url construction!
+  return fetch(`http://localhost:5001/${endpoint}`, headers)
+    .then(res => res.json())
+    .then(comments => ({
+      ...post,
+      comments
+    }));
+};
+
 export const fetchAllPosts = category => dispatch => {
   const endpoint = category !== null ? `${category}/posts` : 'posts';
   const headers = {headers: {'Authorization': 'thisisatest'}};
@@ -33,6 +46,10 @@ export const fetchAllPosts = category => dispatch => {
   // TODO: Have some utility/config for url construction!
   return fetch(`http://localhost:5001/${endpoint}`, headers)
     .then(res => res.json())
-    .then(json => dispatch(recievePosts(json)))
+    .then(posts => {
+      const commentsPromises = posts.map(fetchPostCommentsAndAddToPost);
+      return Promise.all(commentsPromises);
+    })
+    .then(postsWithComments => dispatch(recievePosts(postsWithComments)))
     .catch(err => dispatch(requestPostsError(err)));
 };
