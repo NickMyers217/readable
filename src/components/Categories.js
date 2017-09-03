@@ -38,7 +38,7 @@ class Categories extends Component {
 
   hasSuccesfullyFetched() {
     const { isFetching, isError, lastUpdated } = this.props;
-    return !isFetching && !isError && lastUpdated;
+    return !isFetching && !isError;
   }
 
   hasFetchedWithError() {

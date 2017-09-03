@@ -19,17 +19,20 @@ export const requestPostsError = error => ({
   erroredAt: Date.now()
 });
 
-export const fetchAllPosts = () => dispatch => {
-  dispatch(requestPosts());
-  // TODO: Have some utility/config for url construction!
-  return fetch('http://localhost:5001/posts', {headers: {'Authorization': 'thisisatest'}})
-    .then(res => res.json())
-    .then(json => dispatch(recievePosts(json)))
-    .catch(err => dispatch(requestPostsError(err)));
-};
-
 export const updateCategoryAndTitle = (category, title) => ({
   type: UPDATE_CATEGORY_AND_TITLE,
   category,
   title
 });
+
+export const fetchAllPosts = category => dispatch => {
+  const endpoint = category !== null ? `${category}/posts` : 'posts';
+  const headers = {headers: {'Authorization': 'thisisatest'}};
+
+  dispatch(requestPosts());
+  // TODO: Have some utility/config for url construction!
+  return fetch(`http://localhost:5001/${endpoint}`, headers)
+    .then(res => res.json())
+    .then(json => dispatch(recievePosts(json)))
+    .catch(err => dispatch(requestPostsError(err)));
+};

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Post from './Post';
+import { PostSummary } from './Post';
 import LoadingSpinner from './LoadingSpinner';
 import Alert from './Alert';
 
@@ -10,7 +10,7 @@ const PostList = ({ posts, isSuccess, isError, isLoading }) => (
       <LoadingSpinner />}
     {isSuccess &&
       (posts.length > 0
-        ? posts.map(post => <Post key={post.id} post={post} />)
+        ? posts.map(post => <PostSummary key={post.id} post={post} />)
         : <h5 className='text text-secondary'>There are no posts in this category :(</h5>)}
     {isError &&
       <Alert
@@ -25,20 +25,13 @@ class Posts extends Component {
     const category = params.category ? params.category : null;
     const title = category ? `Posts for ${category}` : 'All Posts';
 
-    this.props.fetchAllPosts();
     this.props.updateCategoryAndTitle(category, title);
-  }
-
-  getPostsFilteredByCategory() {
-    const { category } = this.props;
-    return this.props.posts.filter(post => (
-      category === null || post.category === category
-    ));
+    this.props.fetchAllPosts(category);
   }
 
   hasSuccesfullyFetched() {
     const { isFetching, isError, lastUpdated } = this.props;
-    return !isFetching && !isError && lastUpdated;
+    return !isFetching && !isError;
   }
 
   hasFetchedWithError() {
@@ -48,7 +41,7 @@ class Posts extends Component {
 
   // TODO: Implement sorting
   render() {
-    const { isFetching } = this.props;
+    const { isFetching, posts } = this.props;
 
     return (
       <div>
@@ -58,7 +51,7 @@ class Posts extends Component {
           isSuccess={this.hasSuccesfullyFetched()}
           isError={this.hasFetchedWithError()}
           isLoading={isFetching}
-          posts={this.getPostsFilteredByCategory()} />
+          posts={posts} />
       </div>
     );
   }

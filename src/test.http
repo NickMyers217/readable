@@ -1,6 +1,14 @@
 GET http://localhost:5001/posts
 Authorization: thisisatest
 
-
 GET http://localhost:5001/categories
+Authorization: thisisatest
+
+GET http://localhost:5001/redux/posts
+Authorization: thisisatest
+
+GET http://localhost:5001/posts/8xf0y6ziyjabvozdd253nd
+Authorization: thisisatest
+
+GET http://localhost:5001/posts/8xf0y6ziyjabvozdd253nd/comments
 Authorization: thisisatest

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 
-import PostsView from './components/PostsView';
+import PostsView from './PostsView';
 
 class App extends Component {
   render() {
