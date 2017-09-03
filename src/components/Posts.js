@@ -1,11 +1,10 @@
 import React from 'react';
 
 import Post from './Post';
-import Categories from './Categories';
 
 // TODO: PropTypes
 class Posts extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     const params = this.props.match.params;
     const category = params.category ? params.category : null;
     const title = category ? `Posts for ${category}` : 'All Posts';
@@ -14,15 +13,16 @@ class Posts extends React.Component {
     this.props.updateCategoryAndTitle(category, title);
   }
 
-  getPostsFilteredByCategory () {
-    const {category} = this.props;
+  getPostsFilteredByCategory() {
+    const { category } = this.props;
     return this.props.posts.filter(post => (
       category === null || post.category === category
     ));
   }
 
   // TODO: Implement sorting
-  render () {
+  // TODO: Factor in async statuses
+  render() {
     return (
       <div>
         <h4>{this.props.title}</h4>
