@@ -1,4 +1,6 @@
 import React from 'react';
+import IoAndroidDelete from 'react-icons/lib/io/android-delete';
+import IoAndroidCreate from 'react-icons/lib/io/android-create';
 
 const style = {
   width: '100%',
@@ -20,9 +22,12 @@ export const PostSummary = ({post}) => (
       {/* TODO: Show the vote score and up/down vote buttons */}
       {/* TODO: Flesh this out to be a 20 word summary */}
       <p className='card-text'>{post.body}</p>
-      {/* TODO: Flesh this out with edit and delete buttons */}
-      <a href='#' className='card-link'>Card link</a>
-      <a href='#' className='card-link'>Another link</a>
+      <button type='button' className='btn btn-primary' data-toggle='tooltip' data-placement='top' title='Edit this post'>
+        <IoAndroidCreate size={25} />
+      </button>
+      <button type='button' className='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Delete this post'>
+        <IoAndroidDelete size={25} />
+      </button>
     </div>
   </div>
 );
