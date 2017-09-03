@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import Posts from '../components/Posts';
 import {fetchAllPosts, updateCategoryAndTitle} from '../actions';
 
-const mapStateToProps = state => state.posts;
+const mapStateToProps = state => state.postsList;
 const mapDispatchToProps = dispatch => ({
   fetchAllPosts: () => {
     dispatch(fetchAllPosts());

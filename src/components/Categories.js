@@ -15,15 +15,12 @@ const CategoryList = ({ categories, clickFn, isSuccess, isError, isLoading }) =>
     {isLoading &&
       <LoadingSpinner />}
     {isSuccess &&
-      <ul>
-        <li key={'_all'}>
-          <CategoryLink
-            name='All'
-            path='/'
-            clickFn={() => clickFn(null, 'All Posts')} />
+      <ul className='list-group'>
+        <li key={'_all'} className='list-group-item'>
+          <CategoryLink name='All' path='/' clickFn={() => clickFn(null, 'All Posts')} />
         </li>
         {categories.map(({ name, path }) => (
-          <li key={name}>
+          <li key={name} className='list-group-item'>
             <CategoryLink name={name} path={path} clickFn={clickFn} />
           </li>))}
       </ul>}

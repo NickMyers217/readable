@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import Categories from '../components/Categories';
 import {fetchAllCategories, updateCategoryAndTitle} from '../actions';
 
-const mapStateToProps = state => state.categories;
+const mapStateToProps = state => state.categoriesList;
 const mapDispatchToProps = dispatch => ({
   fetchAllCategories: () => {
     dispatch(fetchAllCategories());

@@ -4,8 +4,8 @@ import postsReducer from './posts';
 import categoriesReducer from './categories';
 
 const rootReducer = combineReducers({
-  posts: postsReducer,
-  categories: categoriesReducer
+  postsList: postsReducer,
+  categoriesList: categoriesReducer
 });
 
 export default rootReducer;
