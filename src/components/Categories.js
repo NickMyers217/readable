@@ -37,7 +37,7 @@ class Categories extends Component {
   }
 
   hasSuccesfullyFetched() {
-    const { isFetching, isError, lastUpdated } = this.props;
+    const { isFetching, isError } = this.props;
     return !isFetching && !isError;
   }
 
@@ -49,15 +49,19 @@ class Categories extends Component {
   render() {
     const { categories, updateCategoryAndTitle, isFetching } = this.props;
     return (
-      <div>
-        <h4>Categories</h4>
-        <hr />
-        <CategoryList
-          isSuccess={this.hasSuccesfullyFetched()}
-          isError={this.hasFetchedWithError()}
-          isLoading={isFetching}
-          categories={categories}
-          clickFn={updateCategoryAndTitle} />
+      <div className='row'>
+        <div className='col-12'>
+          <h3>Categories</h3>
+        </div>
+        <div className='col-12'>
+          <hr />
+          <CategoryList
+            isSuccess={this.hasSuccesfullyFetched()}
+            isError={this.hasFetchedWithError()}
+            isLoading={isFetching}
+            categories={categories}
+            clickFn={updateCategoryAndTitle} />
+        </div>
       </div>
     );
   }
