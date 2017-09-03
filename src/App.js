@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 
 import PostsView from './components/PostsView';
 
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
       <BrowserRouter>

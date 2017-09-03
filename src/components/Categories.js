@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import LoadingSpinner from './LoadingSpinner';
+import Alert from './Alert';
 
 const CategoryLink = ({ name, path, clickFn }) => (
   <Link to={path} onClick={() => clickFn(name, `Posts for ${name}`)}>
@@ -27,14 +28,13 @@ const CategoryList = ({ categories, clickFn, isSuccess, isError, isLoading }) =>
           </li>))}
       </ul>}
     {isError &&
-      <div className='alert alert-danger' role='alert'>
-        There was an error while retrieving the categories!
-      </div>}
+      <Alert
+        text={'There was an error while retrieving the categories!'}
+        type={'danger'} />}
   </div>
 );
 
-// TODO: Proptypes
-class Categories extends React.Component {
+class Categories extends Component {
   componentDidMount() {
     this.props.fetchAllCategories();
   }
