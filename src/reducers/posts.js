@@ -8,6 +8,7 @@ import {
   APPLY_NEW_SORTING
 } from '../actions';
 
+// This state will drive the sorting widget on the posts list
 const sortState = {
   highestScore: {
     option: 'highestScore',
@@ -50,6 +51,7 @@ const initialPostsState = {
   isError: false,
   category: null,
   title: 'All Posts',
+  // Default to the first avaiable sorting
   selectedSort: sortState[Object.keys(sortState)[0]].option,
   availableSortings: sortState,
   posts: []
@@ -67,6 +69,7 @@ const postsReducer = (state = initialPostsState, action) => {
         ...state,
         isFetching: false,
         isError: false,
+        // The list of posts should observe the currently set sort
         posts: action.posts.sort(state.availableSortings[state.selectedSort].sortFn),
         lastUpdated: action.recievedAt
       };

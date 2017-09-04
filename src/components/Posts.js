@@ -5,6 +5,28 @@ import { PostSummary } from './Post';
 import LoadingSpinner from './LoadingSpinner';
 import Alert from './Alert';
 
+const SortingMenu = ({ availableSortings, selectedSort, applyNewSorting }) => (
+  <div>
+    <a className='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
+      {availableSortings[selectedSort].display}
+    </a>
+    <div className='dropdown-menu'>
+      {Object.keys(availableSortings)
+        .filter(key => key !== selectedSort)
+        .map(key => availableSortings[key])
+        .map(sorting => (
+          <a key={sorting.option}
+            className='dropdown-item'
+            href='#'
+            onClick={() => applyNewSorting(sorting.option)}>
+            {sorting.display}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+);
+
 const PostList = ({ posts, isSuccess, isError, isLoading }) => (
   <div>
     {isLoading &&
@@ -52,23 +74,10 @@ class Posts extends Component {
         <div className='col-8'>
           <ul className='nav nav-pills justify-content-end'>
             <li className='nav-item dropdown'>
-              <a className='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
-                {availableSortings[selectedSort].display}
-              </a>
-              <div className='dropdown-menu'>
-                {Object.keys(availableSortings)
-                  .filter(key => key !== selectedSort)
-                  .map(key => availableSortings[key])
-                  .map(sorting => (
-                    <a key={sorting.option}
-                      className='dropdown-item'
-                      href='#'
-                      onClick={() => applyNewSorting(sorting.option)}>
-                      {sorting.display}
-                    </a>
-                  ))
-                }
-              </div>
+              <SortingMenu
+                availableSortings={availableSortings}
+                selectedSort={selectedSort}
+                applyNewSorting={applyNewSorting} />
             </li>
             <li className='nav-item'>
               <button className='btn btn-primary'>

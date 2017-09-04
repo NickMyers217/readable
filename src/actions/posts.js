@@ -53,6 +53,7 @@ export const fetchAllPosts = category => dispatch => {
   return fetch(`http://localhost:5001/${endpoint}`, headers)
     .then(res => res.json())
     .then(posts => {
+      // Fetch the comments for each individual post and add them to the data
       const commentsPromises = posts.map(fetchPostCommentsAndAddToPost);
       return Promise.all(commentsPromises);
     })
