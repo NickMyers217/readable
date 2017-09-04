@@ -69,7 +69,7 @@ class Posts extends Component {
             </li>
           </ul>
         </div>
-        <div className='col-12'>
+        <div className='col-12 mt-3'>
           <PostList
             isSuccess={this.hasSuccesfullyFetched()}
             isError={this.hasFetchedWithError()}

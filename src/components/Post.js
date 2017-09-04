@@ -6,11 +6,6 @@ import FaArrowDown from 'react-icons/lib/fa/arrow-down';
 import * as moment from 'moment';
 
 const style = {
-  card: {
-    width: '100%',
-    marginTop: '15px',
-    marginBottom: '15px'
-  },
   voting: {
     position: 'absolute',
     top: '-20px',
@@ -20,8 +15,9 @@ const style = {
   }
 };
 
+// TODO: Implement sorting
 export const PostSummary = ({ post }) => (
-  <div className='card' style={style.card}>
+  <div className='card mb-2'>
     <div className='card-body'>
       <div style={{ position: 'relative' }}>
         <h4 className='card-title'>

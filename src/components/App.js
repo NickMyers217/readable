@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import PostsView from './PostsView';
 
+// TODO: Implement PostDetails page
 class App extends Component {
   render() {
     return (
