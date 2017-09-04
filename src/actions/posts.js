@@ -2,6 +2,7 @@ export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECIEVE_POSTS = 'RECIEVE_POSTS';
 export const REQUEST_POSTS_ERROR = 'REQUEST_POSTS_ERROR';
 export const UPDATE_CATEGORY_AND_TITLE = 'UPDATE_CATEGORY_AND_TITLE';
+export const APPLY_NEW_SORTING = 'APPLY_NEW_SORTING';
 
 export const requestPosts = () => ({
   type: REQUEST_POSTS
@@ -23,6 +24,11 @@ export const updateCategoryAndTitle = (category, title) => ({
   type: UPDATE_CATEGORY_AND_TITLE,
   category,
   title
+});
+
+export const applyNewSorting = sorting => ({
+  type: APPLY_NEW_SORTING,
+  sorting
 });
 
 const fetchPostCommentsAndAddToPost = post => {

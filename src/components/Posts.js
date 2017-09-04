@@ -42,7 +42,7 @@ class Posts extends Component {
 
   // TODO: Implement sorting
   render() {
-    const { isFetching, posts } = this.props;
+    const { isFetching, posts, selectedSort, availableSortings, applyNewSorting } = this.props;
 
     return (
       <div className='row'>
@@ -53,19 +53,27 @@ class Posts extends Component {
           <ul className='nav nav-pills justify-content-end'>
             <li className='nav-item dropdown'>
               <a className='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
-                Sort by: current sort here
+                {availableSortings[selectedSort].display}
               </a>
               <div className='dropdown-menu'>
-                <a className='dropdown-item' href='#'>Highest Score</a>
-                <a className='dropdown-item' href='#'>Lowest Score</a>
-                <a className='dropdown-item' href='#'>Newest</a>
-                <a className='dropdown-item' href='#'>Oldest</a>
+                {Object.keys(availableSortings)
+                  .filter(key => key !== selectedSort)
+                  .map(key => availableSortings[key])
+                  .map(sorting => (
+                    <a key={sorting.option}
+                      className='dropdown-item'
+                      href='#'
+                      onClick={() => applyNewSorting(sorting.option)}>
+                      {sorting.display}
+                    </a>
+                  ))
+                }
               </div>
             </li>
             <li className='nav-item'>
-              <a className='nav-link active' href='#'>
+              <button className='btn btn-primary'>
                 <IoIosPlusOutline size={30} />
-              </a>
+              </button>
             </li>
           </ul>
         </div>
