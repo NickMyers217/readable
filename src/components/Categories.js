@@ -50,11 +50,10 @@ class Categories extends Component {
     const { categories, updateCategoryAndTitle, isFetching } = this.props;
     return (
       <div className='row'>
-        <div className='col-12'>
+        <div className='col-12 mb-4'>
           <h3>Categories</h3>
         </div>
         <div className='col-12'>
-          <hr />
           <CategoryList
             isSuccess={this.hasSuccesfullyFetched()}
             isError={this.hasFetchedWithError()}

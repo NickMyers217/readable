@@ -6,15 +6,24 @@ import FaArrowDown from 'react-icons/lib/fa/arrow-down';
 import * as moment from 'moment';
 
 const style = {
-  width: '100%',
-  marginTop: '15px',
-  marginBottom: '15px'
+  card: {
+    width: '100%',
+    marginTop: '15px',
+    marginBottom: '15px'
+  },
+  voting: {
+    position: 'absolute',
+    top: '-20px',
+    right: '-2px',
+    textAlign: 'center',
+    padding: '5px'
+  }
 };
 
-export const PostSummary = ({post}) => (
-  <div className='card' style={style}>
+export const PostSummary = ({ post }) => (
+  <div className='card' style={style.card}>
     <div className='card-body'>
-      <div style={{position: 'relative'}}>
+      <div style={{ position: 'relative' }}>
         <h4 className='card-title'>
           {post.title} <span className='badge badge-primary'>{post.category}</span>
         </h4>
@@ -23,7 +32,7 @@ export const PostSummary = ({post}) => (
             {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')}
           </em>
         </h6>
-        <div style={{position: 'absolute', top: '-20px', right: '20px', textAlign: 'center', padding: '5'}}>
+        <div style={style.voting}>
           <FaArrowUp />
           <br />
           {post.voteScore}
@@ -40,7 +49,7 @@ export const PostSummary = ({post}) => (
       <h6 className='card-subtitle mb-2 text-muted'>
         {post.comments.length} comments
       </h6>
-      <button type='button' className='btn btn-success' data-toggle='tooltip' data-placement='top' title='Edit this post'>
+      <button type='button' className='btn btn-success mr-2' data-toggle='tooltip' data-placement='top' title='Edit this post'>
         <IoAndroidCreate size={25} />
       </button>
       <button type='button' className='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Delete this post'>

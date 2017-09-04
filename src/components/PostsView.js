@@ -6,10 +6,10 @@ import CategoriesContainer from '../containers/Categories';
 const PostsView = ({match}) => (
   <div className='container' style={{ paddingTop: '15px' }}>
     <div className='row'>
-      <div className='col-12 col-sm-3'>
+      <div className='col-sm-12 col-md-3 mb-4'>
         <CategoriesContainer />
       </div>
-      <div className='col-12 col-sm-9'>
+      <div className='col-sm-12 col-md-9'>
         <PostsContainer match={match} />
       </div>
     </div>

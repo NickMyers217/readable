@@ -46,10 +46,10 @@ class Posts extends Component {
 
     return (
       <div className='row'>
-        <div className='col-6'>
+        <div className='col-4'>
           <h3>{this.props.title}</h3>
         </div>
-        <div className='col-6'>
+        <div className='col-8'>
           <ul className='nav nav-pills justify-content-end'>
             <li className='nav-item dropdown'>
               <a className='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
@@ -70,7 +70,6 @@ class Posts extends Component {
           </ul>
         </div>
         <div className='col-12'>
-          <hr />
           <PostList
             isSuccess={this.hasSuccesfullyFetched()}
             isError={this.hasFetchedWithError()}
