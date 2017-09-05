@@ -4,6 +4,7 @@ import IoAndroidCreate from 'react-icons/lib/io/android-create';
 import FaArrowUp from 'react-icons/lib/fa/arrow-up';
 import FaArrowDown from 'react-icons/lib/fa/arrow-down';
 import * as moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const style = {
   voting: {
@@ -15,16 +16,17 @@ const style = {
   }
 };
 
-// TODO: Implement sorting
 export const PostSummary = ({ post }) => (
   <div className='card mb-2'>
     <div className='card-body'>
       <div style={{ position: 'relative' }}>
-        <h4 className='card-title'>
-          {post.title} <span className='badge badge-primary'>{post.category}</span>
-        </h4>
+        <h5 className='card-title'>
+          <Link to={`/${post.category}/${post.id}`}>
+            {post.title} <span className='badge badge-primary'>{post.category}</span>
+          </Link>
+        </h5>
         <h6 className='card-subtitle mb-2 text-muted'>
-          Submitted by: <strong>{post.author}</strong> on <em>
+          Submitted by <strong>{post.author}</strong> on <em>
             {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')}
           </em>
         </h6>

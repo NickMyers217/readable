@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 
 import PostsView from './PostsView';
+import PostDetailsView from './PostDetailsView';
 
-// TODO: Implement PostDetails page
 class App extends Component {
   render() {
     return (
@@ -11,6 +11,7 @@ class App extends Component {
         <div>
           <Route exact path="/" component={PostsView} />
           <Route exact path="/:category" component={PostsView} />
+          <Route exact path="/:category/:post_id" component={PostDetailsView} />
         </div>
       </BrowserRouter>
     );
