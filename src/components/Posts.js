@@ -5,7 +5,7 @@ import { PostSummary } from './Post';
 import LoadingSpinner from './LoadingSpinner';
 import Alert from './Alert';
 
-const SortingMenu = ({ availableSortings, selectedSort, applyNewSorting }) => (
+const SortingMenu = ({ availableSortings, selectedSort, onSortSelect }) => (
   <div>
     <a className='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
       {availableSortings[selectedSort].display}
@@ -18,7 +18,7 @@ const SortingMenu = ({ availableSortings, selectedSort, applyNewSorting }) => (
           <a key={sorting.option}
             className='dropdown-item'
             href='#'
-            onClick={() => applyNewSorting(sorting.option)}>
+            onClick={() => onSortSelect(sorting.option)}>
             {sorting.display}
           </a>
         ))
@@ -62,7 +62,6 @@ class Posts extends Component {
     return !isFetching && isError;
   }
 
-  // TODO: Implement sorting
   render() {
     const { isFetching, posts, selectedSort, availableSortings, applyNewSorting } = this.props;
 
@@ -77,7 +76,7 @@ class Posts extends Component {
               <SortingMenu
                 availableSortings={availableSortings}
                 selectedSort={selectedSort}
-                applyNewSorting={applyNewSorting} />
+                onSortSelect={applyNewSorting} />
             </li>
             <li className='nav-item'>
               <button className='btn btn-primary'>
