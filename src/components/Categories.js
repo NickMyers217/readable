@@ -1,35 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
-import LoadingSpinner from './LoadingSpinner';
-import Alert from './Alert';
-
-const CategoryLink = ({ name, path, clickFn }) => (
-  <Link to={path} onClick={() => clickFn(name, `Posts for ${name}`)}>
-    {name}
-  </Link>
-);
-
-const CategoryList = ({ categories, clickFn, isSuccess, isError, isLoading }) => (
-  <div>
-    {isLoading &&
-      <LoadingSpinner />}
-    {isSuccess &&
-      <ul className='list-group'>
-        <li key={'_all'} className='list-group-item'>
-          <CategoryLink name='All' path='/' clickFn={() => clickFn(null, 'All Posts')} />
-        </li>
-        {categories.map(({ name, path }) => (
-          <li key={name} className='list-group-item'>
-            <CategoryLink name={name} path={path} clickFn={clickFn} />
-          </li>))}
-      </ul>}
-    {isError &&
-      <Alert
-        text={'There was an error while retrieving the categories!'}
-        type={'danger'} />}
-  </div>
-);
+import CategoryList from './CategoryList';
 
 class Categories extends Component {
   componentDidMount() {
