@@ -32,7 +32,12 @@ class PostDetailsView extends Component {
               isError={this.hasFetchedWithError()}
               errorMessage='There was an error while retrieving the details for this post!'>
               {posts.length > 0
-                ? posts.map(post => <Post key={post.id} post={post} />)
+                ? posts.map(post => (
+                  <Post
+                    key={post.id}
+                    post={post}
+                    showComments={true} />
+                ))
                 : <h5 className='text text-secondary'>There is no post here! :(</h5>}
             </AsyncLoader>
           </div>

@@ -2,7 +2,13 @@ import React from 'react';
 
 const SortingMenu = ({ availableSortings, selectedSort, onSortSelect }) => (
   <div>
-    <a className='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
+    <a
+      className='nav-link dropdown-toggle'
+      data-toggle='dropdown'
+      href='#'
+      role='button'
+      aria-haspopup='true'
+      aria-expanded='false'>
       {availableSortings[selectedSort].display}
     </a>
     <div className='dropdown-menu'>

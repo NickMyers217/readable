@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import IoIosPlusOutline from 'react-icons/lib/io/ios-plus-outline';
 
 import PostList from './PostList';
 import SortingMenu from './SortingMenu';
+import { CreateButton } from './Buttons';
 
 class Posts extends Component {
   componentDidMount() {
@@ -39,9 +39,7 @@ class Posts extends Component {
                 onSortSelect={applyNewSorting} />
             </li>
             <li className='nav-item'>
-              <button className='btn btn-primary'>
-                <IoIosPlusOutline size={30} />
-              </button>
+              <CreateButton tooltip='Create a new post' />
             </li>
           </ul>
         </div>

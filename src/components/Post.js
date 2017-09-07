@@ -1,61 +1,57 @@
 import React from 'react';
-import IoAndroidDelete from 'react-icons/lib/io/android-delete';
-import IoAndroidCreate from 'react-icons/lib/io/android-create';
-import FaArrowUp from 'react-icons/lib/fa/arrow-up';
-import FaArrowDown from 'react-icons/lib/fa/arrow-down';
-import * as moment from 'moment';
 import { Link } from 'react-router-dom';
+import * as moment from 'moment';
 
-const style = {
-  voting: {
-    position: 'absolute',
-    top: '-20px',
-    right: '-2px',
-    textAlign: 'center',
-    padding: '5px'
-  }
-};
+import { EditButton, DeleteButton } from './Buttons';
+import Card from './Card';
+import Voter from './Voter';
 
-const Post = ({ post, summarizeBody=false }) => (
-  <div className='card mb-2'>
-    <div className='card-body'>
-      <div style={{ position: 'relative' }}>
-        <h5 className='card-title'>
-          <Link to={`/${post.category}/${post.id}`}>
-            {post.title} <span className='badge badge-primary'>{post.category}</span>
-          </Link>
-        </h5>
-        <h6 className='card-subtitle mb-2 text-muted'>
-          Submitted by <strong>{post.author}</strong> on <em>
-            {moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')}
-          </em>
-        </h6>
-        <div style={style.voting}>
-          <FaArrowUp />
-          <br />
-          {post.voteScore}
-          <br />
-          <FaArrowDown />
-        </div>
-      </div>
-      <hr />
-      <div className='mt-2 mb-4'>
-        <p className='card-text'>
-          {summarizeBody
-            ? `${post.body.split(' ').slice(0, 20).join(' ')}...`
-            : post.body}
-        </p>
-      </div>
-      <h6 className='card-subtitle mb-2 text-muted'>
+const CommentCard = ({ comment }) => (
+  <Card
+    bodyText={comment.body}
+    footer={`Submitted by ${comment.author} at ${moment(comment.timestamp).format('MMMM Do YYYY, h:mm:ss a')}`}>
+      <Voter score={comment.voteScore} top={20} />
+      <EditButton tooltip='Edit this comment' />
+      <DeleteButton tooltip='Delete this comment' />
+  </Card>
+);
+
+const PostCard = ({ post, summarizeBody }) => (
+  <Card
+    title={
+      <Link to={`/${post.category}/${post.id}`}>
+        {post.title} <span className='badge badge-primary'>{post.category}</span>
+      </Link>
+    }
+    bodyText={
+      summarizeBody
+        ? `${post.body.split(' ').slice(0, 20).join(' ')}...`
+        : post.body
+    }
+    subtitle={
+      <span>Submitted by <strong>{post.author}</strong></span>
+    }
+    footer={moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')}>
+      <Voter score={post.voteScore} />
+      <h6 className='mb-2 text-muted'>
         {post.comments.length} comments
       </h6>
-      <button type='button' className='btn btn-success mr-2' data-toggle='tooltip' data-placement='top' title='Edit this post'>
-        <IoAndroidCreate size={25} />
-      </button>
-      <button type='button' className='btn btn-danger' data-toggle='tooltip' data-placement='top' title='Delete this post'>
-        <IoAndroidDelete size={25} />
-      </button>
-    </div>
+      <EditButton tooltip='Edit this post' />
+      <DeleteButton tooltip='Delete this post' />
+  </Card>
+);
+
+// TODO: Make an add button for a comment
+const Post = ({ post, summarizeBody=false, showComments=false }) => (
+  <div>
+    <PostCard post={post} summarizeBody={summarizeBody} />
+    {showComments &&
+      <div>
+        <h5 className='mt-4'>Comments</h5>
+        {post.comments && post.comments.length > 0
+          ? post.comments.map(comment => <CommentCard key={comment.id} comment={comment} />)
+          : <h5 className='text text-secondary'>There are no comments on this post yet! :(</h5>}
+      </div>}
   </div>
 );
 
