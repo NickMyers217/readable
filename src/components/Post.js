@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as moment from 'moment';
 
-import { EditButton, DeleteButton } from './Buttons';
+import { CreateButton, EditButton, DeleteButton } from './Buttons';
 import Card from './Card';
 import Voter from './Voter';
 
@@ -41,13 +41,23 @@ const PostCard = ({ post, summarizeBody }) => (
   </Card>
 );
 
-// TODO: Make an add button for a comment
 const Post = ({ post, summarizeBody=false, showComments=false }) => (
   <div>
     <PostCard post={post} summarizeBody={summarizeBody} />
     {showComments &&
-      <div>
-        <h5 className='mt-4'>Comments</h5>
+      <div className='mt-4'>
+        <div className='row mb-2'>
+          <div className='col-4'>
+            <h5>Comments</h5>
+          </div>
+          <div className='col-8'>
+            <ul className='nav nav-pills justify-content-end'>
+              <li className='nav-item'>
+                <CreateButton tooltip='Create a new comment' />
+              </li>
+            </ul>
+          </div>
+        </div>
         {post.comments && post.comments.length > 0
           ? post.comments.map(comment => <CommentCard key={comment.id} comment={comment} />)
           : <h5 className='text text-secondary'>There are no comments on this post yet! :(</h5>}
