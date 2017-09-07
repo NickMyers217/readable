@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 
 import PostsView from './PostsView';
-import PostDetailsView from './PostDetailsView';
+import PostDetailsViewContainer from '../containers/PostDetailsView';
 
 class App extends Component {
   render() {
@@ -11,7 +11,7 @@ class App extends Component {
         <div>
           <Route exact path="/" component={PostsView} />
           <Route exact path="/:category" component={PostsView} />
-          <Route exact path="/:category/:post_id" component={PostDetailsView} />
+          <Route exact path="/:category/:post_id" component={PostDetailsViewContainer} />
         </div>
       </BrowserRouter>
     );

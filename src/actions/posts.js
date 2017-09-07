@@ -44,6 +44,19 @@ const fetchPostCommentsAndAddToPost = post => {
     }));
 };
 
+export const fetchSinglePost = postId => dispatch => {
+  const endpoint = `posts/${postId}`;
+  const headers = {headers: {'Authorization': 'thisisatest'}};
+
+  dispatch(requestPosts());
+  // TODO: Have some utility/config for url construction!
+  return fetch(`http://localhost:5001/${endpoint}`, headers)
+    .then(res => res.json())
+    .then(fetchPostCommentsAndAddToPost)
+    .then(postWithComments => dispatch(recievePosts([postWithComments])))
+    .catch(err => dispatch(requestPostsError(err)));
+};
+
 export const fetchAllPosts = category => dispatch => {
   const endpoint = category !== null ? `${category}/posts` : 'posts';
   const headers = {headers: {'Authorization': 'thisisatest'}};

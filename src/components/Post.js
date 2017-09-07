@@ -16,7 +16,7 @@ const style = {
   }
 };
 
-export const PostSummary = ({ post }) => (
+const Post = ({ post, summarizeBody=false }) => (
   <div className='card mb-2'>
     <div className='card-body'>
       <div style={{ position: 'relative' }}>
@@ -41,7 +41,9 @@ export const PostSummary = ({ post }) => (
       <hr />
       <div className='mt-2 mb-4'>
         <p className='card-text'>
-          {`${post.body.split(' ').slice(0, 20).join(' ')}...`}
+          {summarizeBody
+            ? `${post.body.split(' ').slice(0, 20).join(' ')}...`
+            : post.body}
         </p>
       </div>
       <h6 className='card-subtitle mb-2 text-muted'>
@@ -56,3 +58,5 @@ export const PostSummary = ({ post }) => (
     </div>
   </div>
 );
+
+export default Post;
