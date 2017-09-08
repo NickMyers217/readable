@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import * as moment from 'moment';
 
 import { CreateButton, EditButton, DeleteButton } from './Buttons';
 import Card from './Card';
 import Voter from './Voter';
+import Timestamp from './Timestamp';
 
 const CommentCard = ({ comment }) => (
   <Card
     bodyText={comment.body}
-    footer={`Submitted by ${comment.author} at ${moment(comment.timestamp).format('MMMM Do YYYY, h:mm:ss a')}`}>
+    footer={
+      <span>
+        Submitted by {comment.author} at <Timestamp time={comment.timestamp} />
+      </span>
+    }>
       <Voter score={comment.voteScore} top={20} />
       <EditButton tooltip='Edit this comment' />
       <DeleteButton tooltip='Delete this comment' />
@@ -31,7 +35,9 @@ const PostCard = ({ post, summarizeBody }) => (
     subtitle={
       <span>Submitted by <strong>{post.author}</strong></span>
     }
-    footer={moment(post.timestamp).format('MMMM Do YYYY, h:mm:ss a')}>
+    footer={
+      <Timestamp time={post.timestamp} />
+    }>
       <Voter score={post.voteScore} />
       <h6 className='mb-2 text-muted'>
         {post.comments.length} comments
