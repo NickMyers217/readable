@@ -1,3 +1,5 @@
+import * as api from '../api';
+
 export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECIEVE_POSTS = 'RECIEVE_POSTS';
 export const REQUEST_POSTS_ERROR = 'REQUEST_POSTS_ERROR';
@@ -32,11 +34,7 @@ export const applyNewSorting = sorting => ({
 });
 
 const fetchPostCommentsAndAddToPost = post => {
-  const endpoint = `posts/${post.id}/comments`;
-  const headers = {headers: {'Authorization': 'thisisatest'}};
-
-  // TODO: Have some utility/config for url construction!
-  return fetch(`http://localhost:5001/${endpoint}`, headers)
+  return api.fetchPostComments(post.id)
     .then(res => res.json())
     .then(comments => ({
       ...post,
@@ -45,12 +43,8 @@ const fetchPostCommentsAndAddToPost = post => {
 };
 
 export const fetchSinglePost = postId => dispatch => {
-  const endpoint = `posts/${postId}`;
-  const headers = {headers: {'Authorization': 'thisisatest'}};
-
   dispatch(requestPosts());
-  // TODO: Have some utility/config for url construction!
-  return fetch(`http://localhost:5001/${endpoint}`, headers)
+  return api.fetchPost(postId)
     .then(res => res.json())
     .then(fetchPostCommentsAndAddToPost)
     .then(postWithComments => dispatch(recievePosts([postWithComments])))
@@ -58,12 +52,8 @@ export const fetchSinglePost = postId => dispatch => {
 };
 
 export const fetchAllPosts = category => dispatch => {
-  const endpoint = category !== null ? `${category}/posts` : 'posts';
-  const headers = {headers: {'Authorization': 'thisisatest'}};
-
   dispatch(requestPosts());
-  // TODO: Have some utility/config for url construction!
-  return fetch(`http://localhost:5001/${endpoint}`, headers)
+  return api.fetchAllPosts(category)
     .then(res => res.json())
     .then(posts => {
       // Fetch the comments for each individual post and add them to the data

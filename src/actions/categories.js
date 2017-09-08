@@ -1,3 +1,5 @@
+import * as api from '../api';
+
 export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES';
 export const RECIEVE_CATEGORIES = 'RECIEVE_CATEGOREIS';
 export const REQUEST_CATEGORIES_ERROR = 'REQUEST_CATEGORIES_ERROR';
@@ -20,8 +22,7 @@ export const requestCategoriesError = error => ({
 
 export const fetchAllCategories = () => dispatch => {
   dispatch(requestCategories());
-  // TODO: Have some utility/config for url construction!
-  return fetch('http://localhost:5001/categories', {headers: {'Authorization': 'thisisatest'}})
+  return api.fetchAllCategories()
     .then(res => res.json())
     .then(({categories}) => dispatch(recieveCategories(categories)))
     .catch(err => dispatch(requestCategoriesError(err)));
