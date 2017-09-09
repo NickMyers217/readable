@@ -70,7 +70,6 @@ const Post = ({ post, summarizeBody=false, showComments=false }) => (
           : <h5 className='text text-secondary'>There are no comments on this post yet! :(</h5>}
       </div>}
     <Modal id='createCommentModal' title='Add a comment!'>
-      <p>Some form will show up here!</p>
     </Modal>
   </div>
 );

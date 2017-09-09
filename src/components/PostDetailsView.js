@@ -21,7 +21,7 @@ class PostDetailsView extends Component {
 
   // TODO: Add a back button!
   render() {
-    const { match, isFetching, posts } = this.props;
+    const { isFetching, posts } = this.props;
     return (
       <div className='container' style={{ paddingTop: '15px' }}>
         <div className='row'>

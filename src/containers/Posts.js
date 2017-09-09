@@ -5,6 +5,7 @@ import Posts from '../components/Posts';
 import { fetchAllPosts, updateCategoryAndTitle, applyNewSorting } from '../actions';
 
 const mapStateToProps = state => state.postsList;
+
 const mapDispatchToProps = dispatch => ({
   fetchAllPosts: category => {
     dispatch(fetchAllPosts(category));

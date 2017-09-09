@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Modal = ({ id, title, children, submitButton }) => (
+const Modal = ({ id, title, children }) => (
   <div className='modal fade' id={id} tabIndex='-1' role='dialog' aria-hidden='true'>
-    <div className='modal-dialog' role='document'>
+    <div className='modal-dialog modal-lg' role='document'>
       <div className='modal-content'>
         <div className='modal-header'>
           <h5 className='modal-title'>{title}</h5>
@@ -10,13 +10,7 @@ const Modal = ({ id, title, children, submitButton }) => (
             <span aria-hidden='true'>&times;</span>
           </button>
         </div>
-        <div className='modal-body'>
-          {children}
-        </div>
-        <div className='modal-footer'>
-          <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
-          {submitButton}
-        </div>
+        {children}
       </div>
     </div>
   </div>

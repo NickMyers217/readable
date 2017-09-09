@@ -4,6 +4,7 @@ import PostList from './PostList';
 import SortingMenu from './SortingMenu';
 import { CreateButton } from './Buttons';
 import Modal from './Modal';
+import PostFormContainer from '../containers/PostForm';
 
 class Posts extends Component {
   componentDidMount() {
@@ -41,6 +42,9 @@ class Posts extends Component {
             </li>
             <li className='nav-item'>
               <CreateButton tooltip='Create a new post' modalId='createPostModal' />
+              <Modal id='createPostModal' title='Add a new post!'>
+                <PostFormContainer />
+              </Modal>
             </li>
           </ul>
         </div>
@@ -51,9 +55,6 @@ class Posts extends Component {
             isLoading={isFetching}
             posts={posts} />
         </div>
-        <Modal id='createPostModal' title='Add a new post!'>
-          <p>Some form will show up here!</p>
-        </Modal>
       </div>
     );
   }
