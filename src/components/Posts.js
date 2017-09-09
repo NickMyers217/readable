@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PostList from './PostList';
 import SortingMenu from './SortingMenu';
 import { CreateButton } from './Buttons';
+import Modal from './Modal';
 
 class Posts extends Component {
   componentDidMount() {
@@ -39,7 +40,7 @@ class Posts extends Component {
                 onSortSelect={applyNewSorting} />
             </li>
             <li className='nav-item'>
-              <CreateButton tooltip='Create a new post' />
+              <CreateButton tooltip='Create a new post' modalId='createPostModal' />
             </li>
           </ul>
         </div>
@@ -50,6 +51,9 @@ class Posts extends Component {
             isLoading={isFetching}
             posts={posts} />
         </div>
+        <Modal id='createPostModal' title='Add a new post!'>
+          <p>Some form will show up here!</p>
+        </Modal>
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { CreateButton, EditButton, DeleteButton } from './Buttons';
+import Modal from './Modal';
 import Card from './Card';
 import Voter from './Voter';
 import Timestamp from './Timestamp';
@@ -59,7 +60,7 @@ const Post = ({ post, summarizeBody=false, showComments=false }) => (
           <div className='col-8'>
             <ul className='nav nav-pills justify-content-end'>
               <li className='nav-item'>
-                <CreateButton tooltip='Create a new comment' />
+                <CreateButton tooltip='Create a new comment' modalId='createCommentModal' />
               </li>
             </ul>
           </div>
@@ -68,6 +69,9 @@ const Post = ({ post, summarizeBody=false, showComments=false }) => (
           ? post.comments.map(comment => <CommentCard key={comment.id} comment={comment} />)
           : <h5 className='text text-secondary'>There are no comments on this post yet! :(</h5>}
       </div>}
+    <Modal id='createCommentModal' title='Add a comment!'>
+      <p>Some form will show up here!</p>
+    </Modal>
   </div>
 );
 

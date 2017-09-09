@@ -11,7 +11,6 @@ import rootReducer from './reducers';
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 // TODO: Add proptypes to all components
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

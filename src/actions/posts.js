@@ -1,10 +1,14 @@
 import * as api from '../api';
+import Post from '../models';
 
 export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECIEVE_POSTS = 'RECIEVE_POSTS';
 export const REQUEST_POSTS_ERROR = 'REQUEST_POSTS_ERROR';
 export const UPDATE_CATEGORY_AND_TITLE = 'UPDATE_CATEGORY_AND_TITLE';
 export const APPLY_NEW_SORTING = 'APPLY_NEW_SORTING';
+export const START_SEND_POST = 'START_SEND_POST';
+export const FINISH_SEND_POST = 'FINISH_SEND_POST';
+export const FINISH_SEND_POST_ERROR = 'FINISH_SEND_POST_ERROR';
 
 export const requestPosts = () => ({
   type: REQUEST_POSTS
@@ -62,4 +66,7 @@ export const fetchAllPosts = category => dispatch => {
     })
     .then(postsWithComments => dispatch(recievePosts(postsWithComments)))
     .catch(err => dispatch(requestPostsError(err)));
+};
+
+export const addNewPost = () => dispatch => {
 };

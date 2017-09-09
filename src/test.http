@@ -15,3 +15,16 @@ Authorization: thisisatest
 
 GET http://localhost:5001/posts/6ni6ok3ym7mf1p33lnez/comments
 Authorization: thisisatest
+
+POST http://localhost:5001/posts
+Authorization: thisisatest
+Content-Type: application/json
+
+{
+  "id": "asdlfkjsldkjf",
+  "timestamp": 134234265,
+  "title": "test post",
+  "body": "this is a test post",
+  "owner": "nick",
+  "category": "udacity"
+}
