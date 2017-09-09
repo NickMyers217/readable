@@ -1,56 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import { CreateButton, EditButton, DeleteButton } from './Buttons';
-import Modal from './Modal';
-import Card from './Card';
-import Voter from './Voter';
-import Timestamp from './Timestamp';
+import PostCard from './PostCard';
+import CommentCard from './CommentCard';
+import { CreateButton } from './util/Buttons';
+import Modal from './util/Modal';
 
-const CommentCard = ({ comment }) => (
-  <Card
-    bodyText={comment.body}
-    footer={
-      <span>
-        Submitted by {comment.author} at <Timestamp time={comment.timestamp} />
-      </span>
-    }>
-      <Voter score={comment.voteScore} top={20} />
-      <EditButton tooltip='Edit this comment' />
-      <DeleteButton tooltip='Delete this comment' />
-  </Card>
-);
-
-const PostCard = ({ post, summarizeBody }) => (
-  <Card
-    title={
-      <Link to={`/${post.category}/${post.id}`}>
-        {post.title} <span className='badge badge-primary'>{post.category}</span>
-      </Link>
-    }
-    bodyText={
-      summarizeBody
-        ? `${post.body.split(' ').slice(0, 20).join(' ')}...`
-        : post.body
-    }
-    subtitle={
-      <span>Submitted by <strong>{post.author}</strong></span>
-    }
-    footer={
-      <Timestamp time={post.timestamp} />
-    }>
-      <Voter score={post.voteScore} />
-      <h6 className='mb-2 text-muted'>
-        {post.comments.length} comments
-      </h6>
-      <EditButton tooltip='Edit this post' />
-      <DeleteButton tooltip='Delete this post' />
-  </Card>
-);
-
-const Post = ({ post, summarizeBody=false, showComments=false }) => (
+const Post = ({ post, summarizeBody=false, showComments=false, onDelete }) => (
   <div>
-    <PostCard post={post} summarizeBody={summarizeBody} />
+    <PostCard post={post} summarizeBody={summarizeBody} onDeleteBtnClick={onDelete} />
     {showComments &&
       <div className='mt-4'>
         <div className='row mb-2'>
@@ -61,6 +18,8 @@ const Post = ({ post, summarizeBody=false, showComments=false }) => (
             <ul className='nav nav-pills justify-content-end'>
               <li className='nav-item'>
                 <CreateButton tooltip='Create a new comment' modalId='createCommentModal' />
+                <Modal id='createCommentModal' title='Add a comment!'>
+                </Modal>
               </li>
             </ul>
           </div>
@@ -69,8 +28,6 @@ const Post = ({ post, summarizeBody=false, showComments=false }) => (
           ? post.comments.map(comment => <CommentCard key={comment.id} comment={comment} />)
           : <h5 className='text text-secondary'>There are no comments on this post yet! :(</h5>}
       </div>}
-    <Modal id='createCommentModal' title='Add a comment!'>
-    </Modal>
   </div>
 );
 

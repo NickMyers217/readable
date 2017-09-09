@@ -1,9 +1,9 @@
 import React from 'react';
 
-import AsyncLoader from './AsyncLoader';
+import AsyncLoader from './util/AsyncLoader';
 import Post from './Post';
 
-const PostList = ({ isLoading, isSuccess, isError, posts }) => (
+const PostList = ({ isLoading, isSuccess, isError, posts, onPostDelete }) => (
   <div>
     <AsyncLoader
       isLoading={isLoading}
@@ -15,7 +15,8 @@ const PostList = ({ isLoading, isSuccess, isError, posts }) => (
           <Post
             key={post.id}
             post={post}
-            summarizeBody={true} />
+            summarizeBody={true}
+            onDelete={onPostDelete} />
         ))
         : <h5 className='text text-secondary'>There are no posts in this category :(</h5>}
     </AsyncLoader>

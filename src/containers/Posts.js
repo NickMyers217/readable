@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Posts from '../components/Posts';
-import { fetchAllPosts, updateCategoryAndTitle, applyNewSorting } from '../actions';
+import { fetchAllPosts, updateCategoryAndTitle, applyNewSorting, deletePostServer } from '../actions';
 
 const mapStateToProps = state => state.postsList;
 
@@ -15,6 +15,9 @@ const mapDispatchToProps = dispatch => ({
   },
   applyNewSorting: sorting => {
     dispatch(applyNewSorting(sorting));
+  },
+  deletePost: postId => {
+    dispatch(deletePostServer(postId));
   }
 });
 

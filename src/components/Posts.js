@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import PostList from './PostList';
 import SortingMenu from './SortingMenu';
-import { CreateButton } from './Buttons';
-import Modal from './Modal';
+import { CreateButton } from './util/Buttons';
+import Modal from './util/Modal';
 import PostFormContainer from '../containers/PostForm';
 
 class Posts extends Component {
@@ -26,7 +26,7 @@ class Posts extends Component {
   }
 
   render() {
-    const { title, posts, isFetching, selectedSort, availableSortings, applyNewSorting } = this.props; 
+    const { title, posts, isFetching, selectedSort, availableSortings, applyNewSorting, deletePost } = this.props; 
     return (
       <div className='row'>
         <div className='col-4'>
@@ -53,7 +53,8 @@ class Posts extends Component {
             isSuccess={this.hasSuccesfullyFetched()}
             isError={this.hasFetchedWithError()}
             isLoading={isFetching}
-            posts={posts} />
+            posts={posts.filter(({ deleted }) => !deleted)}
+            onPostDelete={deletePost} />
         </div>
       </div>
     );

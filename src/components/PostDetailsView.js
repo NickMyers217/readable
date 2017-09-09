@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import AsyncLoader from './AsyncLoader';
+import AsyncLoader from './util/AsyncLoader';
 import Post from './Post';
 
 class PostDetailsView extends Component {

@@ -28,3 +28,6 @@ Content-Type: application/json
   "owner": "nick",
   "category": "udacity"
 }
+
+DELETE http://localhost:5001/posts/6ni6ok3ym7mf1p33lnez
+Authorization: thisisatest

@@ -38,6 +38,16 @@ export const addNewPost = post => {
   });
 };
 
+export const deletePost = postId => {
+  const endpoint = buildUrl(`/posts/${postId}`);
+  return fetch(endpoint, {
+    method: 'DELETE',
+    headers
+  });
+};
+
+// TODO: Edit posts
+
 // TODO: Add, edit, and delete comments
 
 // TODO: up and downvote posts
