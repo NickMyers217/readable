@@ -4,6 +4,7 @@ import {
   REQUEST_POSTS,
   RECIEVE_POSTS,
   REQUEST_POSTS_ERROR,
+  ADD_POST_TO_LIST,
   UPDATE_CATEGORY_AND_TITLE,
   APPLY_NEW_SORTING
 } from '../actions';
@@ -80,6 +81,14 @@ const postsReducer = (state = initialPostsState, action) => {
         isError: true,
         error: action.error,
         erroredAt: action.erroredAt
+      };
+    case ADD_POST_TO_LIST:
+      let newPosts = state.posts.concat([action.post]);
+      newPosts.sort(state.availableSortings[state.selectedSort].sortFn);
+      console.log(newPosts);
+      return {
+        ...state,
+        posts: newPosts
       };
     case UPDATE_CATEGORY_AND_TITLE:
       return {

@@ -5,11 +5,16 @@ export const ON_FIELD_CHANGE = 'ON_FIELD_CHANGE';
 export const START_SEND_POST = 'START_SEND_POST';
 export const FINISH_SEND_POST = 'FINISH_SEND_POST';
 export const FINISH_SEND_POST_ERROR = 'FINISH_SEND_POST_ERROR';
+export const CLEAR_FORM = 'CLEAR_FORM';
 
 export const onFieldChange = (field, value) => ({
   type: ON_FIELD_CHANGE,
   field,
   value
+});
+
+export const clearForm = () => ({
+  type: CLEAR_FORM
 });
 
 export const startSendPost = () => ({

@@ -1,5 +1,6 @@
 import {
   ON_FIELD_CHANGE,
+  CLEAR_FORM,
   START_SEND_POST,
   FINISH_SEND_POST,
   FINISH_SEND_POST_ERROR
@@ -42,6 +43,14 @@ const postFormReducer = (state = initialState, action) => {
         isError: true,
         error: action.error,
         erroredAt: action.erroredAt
+      };
+    case CLEAR_FORM:
+      return {
+        ...state,
+        title: '',
+        body: '',
+        category: '',
+        author: ''
       };
     default:
       return state;

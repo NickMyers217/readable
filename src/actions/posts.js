@@ -3,6 +3,7 @@ import * as api from '../api';
 export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECIEVE_POSTS = 'RECIEVE_POSTS';
 export const REQUEST_POSTS_ERROR = 'REQUEST_POSTS_ERROR';
+export const ADD_POST_TO_LIST = 'ADD_POST_TO_LIST';
 export const UPDATE_CATEGORY_AND_TITLE = 'UPDATE_CATEGORY_AND_TITLE';
 export const APPLY_NEW_SORTING = 'APPLY_NEW_SORTING';
 
@@ -21,6 +22,11 @@ export const requestPostsError = error => ({
   error,
   erroredAt: Date.now()
 });
+
+export const addPostToList = post => ({
+  type: ADD_POST_TO_LIST,
+  post: { ...post, comments: [] }
+})
 
 export const updateCategoryAndTitle = (category, title) => ({
   type: UPDATE_CATEGORY_AND_TITLE,
