@@ -2,11 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Card from './util/Card';
-import { CreateButton, EditButton, DeleteButton } from './util/Buttons';
-import Voter from './Voter';
 import Timestamp from './util/Timestamp';
+import PostActionsContainer from '../containers/PostActions';
 
-const PostCard = ({ post, summarizeBody, onDeleteBtnClick }) => (
+const PostCard = ({ post, summarizeBody }) => (
   <Card
     title={
       <Link to={`/${post.category}/${post.id}`}>
@@ -24,12 +23,10 @@ const PostCard = ({ post, summarizeBody, onDeleteBtnClick }) => (
     footer={
       <Timestamp time={post.timestamp} />
     }>
-      <Voter score={post.voteScore} />
       <h6 className='mb-2 text-muted'>
         {post.comments.length} comments
       </h6>
-      <EditButton tooltip='Edit this post' />
-      <DeleteButton tooltip='Delete this post' onClick={() => onDeleteBtnClick(post.id)} />
+      <PostActionsContainer post={post} />
   </Card>
 );
 

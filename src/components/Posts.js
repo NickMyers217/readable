@@ -26,7 +26,7 @@ class Posts extends Component {
   }
 
   render() {
-    const { title, posts, isFetching, selectedSort, availableSortings, applyNewSorting, deletePost } = this.props; 
+    const { title, posts, isFetching, selectedSort, availableSortings, applyNewSorting } = this.props; 
     return (
       <div className='row'>
         <div className='col-4'>
@@ -53,8 +53,7 @@ class Posts extends Component {
             isSuccess={this.hasSuccesfullyFetched()}
             isError={this.hasFetchedWithError()}
             isLoading={isFetching}
-            posts={posts.filter(({ deleted }) => !deleted)}
-            onPostDelete={deletePost} />
+            posts={posts.filter(({ deleted }) => !deleted)} />
         </div>
       </div>
     );

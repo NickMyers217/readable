@@ -1,10 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import Card from './util/Card';
-import { CreateButton, EditButton, DeleteButton } from './util/Buttons';
-import Voter from './Voter';
 import Timestamp from './util/Timestamp';
+import CommentActions from './CommentActions';
 
 const CommentCard = ({ comment }) => (
   <Card
@@ -14,9 +12,7 @@ const CommentCard = ({ comment }) => (
         Submitted by {comment.author} at <Timestamp time={comment.timestamp} />
       </span>
     }>
-      <Voter score={comment.voteScore} top={20} />
-      <EditButton tooltip='Edit this comment' />
-      <DeleteButton tooltip='Delete this comment' />
+    <CommentActions comment={comment} />
   </Card>
 );
 

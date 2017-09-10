@@ -1,33 +1,13 @@
 import React from 'react';
 
 import PostCard from './PostCard';
-import CommentCard from './CommentCard';
-import { CreateButton } from './util/Buttons';
-import Modal from './util/Modal';
+import CommentList from './CommentList';
 
-const Post = ({ post, summarizeBody=false, showComments=false, onDelete }) => (
+const Post = ({ post, summarizeBody=false, showComments=false }) => (
   <div>
-    <PostCard post={post} summarizeBody={summarizeBody} onDeleteBtnClick={onDelete} />
+    <PostCard post={post} summarizeBody={summarizeBody} />
     {showComments &&
-      <div className='mt-4'>
-        <div className='row mb-2'>
-          <div className='col-4'>
-            <h5>Comments</h5>
-          </div>
-          <div className='col-8'>
-            <ul className='nav nav-pills justify-content-end'>
-              <li className='nav-item'>
-                <CreateButton tooltip='Create a new comment' modalId='createCommentModal' />
-                <Modal id='createCommentModal' title='Add a comment!'>
-                </Modal>
-              </li>
-            </ul>
-          </div>
-        </div>
-        {post.comments && post.comments.length > 0
-          ? post.comments.map(comment => <CommentCard key={comment.id} comment={comment} />)
-          : <h5 className='text text-secondary'>There are no comments on this post yet! :(</h5>}
-      </div>}
+      <CommentList comments={post.comments} />}
   </div>
 );
 
