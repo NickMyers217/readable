@@ -26,13 +26,13 @@ class Posts extends Component {
   }
 
   render() {
-    const { title, posts, isFetching, selectedSort, availableSortings, applyNewSorting } = this.props; 
+    const { title, posts, isFetching, selectedSort, availableSortings, applyNewSorting, setupForm } = this.props; 
     return (
       <div className='row'>
-        <div className='col-4'>
+        <div className='col-6'>
           <h3>{title}</h3>
         </div>
-        <div className='col-8'>
+        <div className='col-6'>
           <ul className='nav nav-pills justify-content-end'>
             <li className='nav-item dropdown'>
               <SortingMenu
@@ -41,8 +41,8 @@ class Posts extends Component {
                 onSortSelect={applyNewSorting} />
             </li>
             <li className='nav-item'>
-              <CreateButton tooltip='Create a new post' modalId='createPostModal' />
-              <Modal id='createPostModal' title='Add a new post!'>
+              <CreateButton tooltip='Create a new post' modalId='createPostModal' onClick={setupForm} />
+              <Modal id='createPostModal'>
                 <PostFormContainer />
               </Modal>
             </li>

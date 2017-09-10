@@ -4,6 +4,7 @@ export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECIEVE_POSTS = 'RECIEVE_POSTS';
 export const REQUEST_POSTS_ERROR = 'REQUEST_POSTS_ERROR';
 export const ADD_POST_TO_LIST = 'ADD_POST_TO_LIST';
+export const EDIT_POST_IN_LIST = 'EDIT_POST_IN_LIST';
 export const DELETE_POST = 'DELETE_POST';
 export const UPDATE_CATEGORY_AND_TITLE = 'UPDATE_CATEGORY_AND_TITLE';
 export const APPLY_NEW_SORTING = 'APPLY_NEW_SORTING';
@@ -26,6 +27,11 @@ export const requestPostsError = error => ({
 
 export const addPostToList = post => ({
   type: ADD_POST_TO_LIST,
+  post: { ...post, comments: [] }
+});
+
+export const editPostInList = post => ({
+  type: EDIT_POST_IN_LIST,
   post: { ...post, comments: [] }
 });
 

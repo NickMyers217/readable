@@ -46,10 +46,25 @@ export const deletePost = postId => {
   });
 };
 
-// TODO: Edit posts
+export const editPost = (id, title, body) => {
+  const endpoint = buildUrl(`/posts/${id}`);
+  return fetch(endpoint, {
+    method: 'PUT',
+    body: JSON.stringify({ title, body }),
+    headers: { ...headers, 'Content-Type': 'application/json' }
+  });
+};
+
+export const votePost = (postId, isUpvote) => {
+  const endpoint = buildUrl(`/posts/${postId}`);
+  return fetch(endpoint, {
+    method: 'POST',
+    body: JSON.stringify({
+      option: isUpvote ? 'upVote' : 'downVote'
+    }),
+    headers: { ...headers, 'Content-Type': 'application/json' }
+  });
+}
 
 // TODO: Add, edit, and delete comments
-
-// TODO: up and downvote posts
-
 // TODO: up and downvote comments

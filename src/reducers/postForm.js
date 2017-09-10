@@ -1,12 +1,15 @@
 import {
   ON_FIELD_CHANGE,
+  SET_FORM_MODE,
   CLEAR_FORM,
+  POPULATE_FORM,
   START_SEND_POST,
   FINISH_SEND_POST,
   FINISH_SEND_POST_ERROR
 } from '../actions';
 
 const initialState = {
+  formMode: 'create',
   title: '',
   body: '',
   author: '',
@@ -15,12 +18,35 @@ const initialState = {
   isError: false
 };
 
-const postFormReducer = (state = initialState, action) => {
+const postFormReducer = (state=initialState, action) => {
   switch (action.type) {
     case ON_FIELD_CHANGE:
       return {
         ...state,
         [action.field]: action.value
+      };
+    case SET_FORM_MODE:
+      return {
+        ...state,
+        formMode: action.mode
+      };
+    case CLEAR_FORM:
+      return {
+        ...state,
+        title: '',
+        body: '',
+        category: '',
+        author: ''
+      };
+    case POPULATE_FORM:
+      const { id, title, body, author, category } = action.post;
+      return {
+        ...state,
+        id,
+        title,
+        body,
+        author,
+        category
       };
     case START_SEND_POST:
       return {
@@ -43,14 +69,6 @@ const postFormReducer = (state = initialState, action) => {
         isError: true,
         error: action.error,
         erroredAt: action.erroredAt
-      };
-    case CLEAR_FORM:
-      return {
-        ...state,
-        title: '',
-        body: '',
-        category: '',
-        author: ''
       };
     default:
       return state;

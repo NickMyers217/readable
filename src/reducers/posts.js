@@ -5,6 +5,7 @@ import {
   RECIEVE_POSTS,
   REQUEST_POSTS_ERROR,
   ADD_POST_TO_LIST,
+  EDIT_POST_IN_LIST,
   DELETE_POST,
   UPDATE_CATEGORY_AND_TITLE,
   APPLY_NEW_SORTING
@@ -91,6 +92,13 @@ const postsReducer = (state = initialPostsState, action) => {
         posts: state.category !== null
           ? newPosts.filter(({ category }) => category === state.category)
           : newPosts
+      };
+    case EDIT_POST_IN_LIST:
+      return {
+        ...state,
+        posts: state.posts.map(post => (
+          post.id === action.post.id ? action.post : post
+        ))
       };
     case DELETE_POST:
       return {

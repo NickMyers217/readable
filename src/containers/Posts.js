@@ -2,11 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Posts from '../components/Posts';
-import { fetchAllPosts, updateCategoryAndTitle, applyNewSorting } from '../actions';
+import { setFormMode, clearForm, fetchAllPosts, updateCategoryAndTitle, applyNewSorting } from '../actions';
 
 const mapStateToProps = state => state.postsList;
 
 const mapDispatchToProps = dispatch => ({
+  setupForm: () => {
+    dispatch(setFormMode('create'));
+    dispatch(clearForm());
+  },
   fetchAllPosts: category => {
     dispatch(fetchAllPosts(category));
   },

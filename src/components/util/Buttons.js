@@ -17,8 +17,8 @@ const Button = ({ type, tooltip, children, modalId, marginRight=0, marginLeft=0,
   </button>
 );
 
-export const EditButton = ({ size=25, tooltip }) => (
-  <Button type='success' tooltip={tooltip} marginRight={2}>
+export const EditButton = ({ size=25, tooltip, modalId, onClick }) => (
+  <Button type='success' tooltip={tooltip} marginRight={2} modalId={modalId} onClick={onClick}>
     <IoAndroidCreate size={size} />
   </Button>
 );
@@ -29,8 +29,8 @@ export const DeleteButton = ({ size=25, tooltip, onClick }) => (
   </Button>
 );
 
-export const CreateButton = ({ size=30, tooltip, modalId }) => (
-  <Button type='primary' tooltip={tooltip} modalId={modalId}>
+export const CreateButton = ({ size=30, tooltip, modalId, onClick }) => (
+  <Button type='primary' tooltip={tooltip} modalId={modalId} onClick={onClick}>
     <IoIosPlusOutline size={size} />
   </Button>
 );
