@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PostsContainer from '../containers/Posts';
-import CategoriesContainer from '../containers/Categories';
+import PostsContainer from '../../containers/Posts';
+import CategoriesContainer from '../../containers/Categories';
 
 const PostsView = ({match}) => (
   <div className='container' style={{ paddingTop: '15px' }}>

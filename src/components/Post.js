@@ -1,13 +1,13 @@
 import React from 'react';
 
 import PostCard from './PostCard';
-import CommentList from './CommentList';
+import CommentsContainer from '../containers/Comments';
 
 const Post = ({ post, summarizeBody=false, showComments=false }) => (
   <div>
     <PostCard post={post} summarizeBody={summarizeBody} />
     {showComments &&
-      <CommentList comments={post.comments} />}
+      <CommentsContainer postId={post.id} comments={post.comments} />}
   </div>
 );
 

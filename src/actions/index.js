@@ -1,3 +1,3 @@
 export * from './posts';
 export * from './categories';
-export * from './postForm';
+export * from './dataForm';

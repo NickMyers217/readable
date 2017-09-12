@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import PostDetailsView from '../components/PostDetailsView';
+import PostDetailsView from '../components/views/PostDetailsView';
 import { fetchSinglePost } from '../actions';
 
 const mapStateToProps = state => state.postsList;

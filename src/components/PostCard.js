@@ -26,7 +26,7 @@ const PostCard = ({ post, summarizeBody }) => (
       <h6 className='mb-2 text-muted'>
         {post.comments.length} comments
       </h6>
-      <PostActionsContainer post={post} />
+      <PostActionsContainer data={post} />
   </Card>
 );
 

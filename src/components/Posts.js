@@ -4,7 +4,7 @@ import PostList from './PostList';
 import SortingMenu from './SortingMenu';
 import { CreateButton } from './util/Buttons';
 import Modal from './util/Modal';
-import PostFormContainer from '../containers/PostForm';
+import DataFormContainer from '../containers/DataForm';
 
 class Posts extends Component {
   componentDidMount() {
@@ -41,9 +41,9 @@ class Posts extends Component {
                 onSortSelect={applyNewSorting} />
             </li>
             <li className='nav-item'>
-              <CreateButton tooltip='Create a new post' modalId='createPostModal' onClick={setupForm} />
-              <Modal id='createPostModal'>
-                <PostFormContainer />
+              <CreateButton tooltip='Create a new post' modalId='postAndCommentModal' onClick={setupForm} />
+              <Modal id='postAndCommentModal'>
+                <DataFormContainer />
               </Modal>
             </li>
           </ul>

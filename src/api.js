@@ -64,7 +64,41 @@ export const votePost = (postId, isUpvote) => {
     }),
     headers: { ...headers, 'Content-Type': 'application/json' }
   });
-}
+};
 
-// TODO: Add, edit, and delete comments
-// TODO: up and downvote comments
+export const addNewComment = comment => {
+  const endpoint = buildUrl('/comments');
+  return fetch(endpoint, {
+    method: 'POST',
+    body: JSON.stringify(comment),
+    headers: { ...headers, 'Content-Type': 'application/json' }
+  });
+};
+
+export const deleteComment = commentId => {
+  const endpoint = buildUrl(`/comments/${commentId}`);
+  return fetch(endpoint, {
+    method: 'DELETE',
+    headers
+  });
+};
+
+export const editComment = (id, body) => {
+  const endpoint = buildUrl(`/comments/${id}`);
+  return fetch(endpoint, {
+    method: 'PUT',
+    body: JSON.stringify({ body, timestamp: Date.now() }),
+    headers: { ...headers, 'Content-Type': 'application/json' }
+  });
+};
+
+export const voteComment = (commentId, isUpvote) => {
+  const endpoint = buildUrl(`/comments/${commentId}`);
+  return fetch(endpoint, {
+    method: 'POST',
+    body: JSON.stringify({
+      option: isUpvote ? 'upVote' : 'downVote'
+    }),
+    headers: { ...headers, 'Content-Type': 'application/json' }
+  });
+};

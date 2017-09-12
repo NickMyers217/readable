@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import AsyncLoader from './util/AsyncLoader';
-import Post from './Post';
+import PostList from '../PostList';
 
 class PostDetailsView extends Component {
   componentDidMount() {
@@ -27,20 +26,12 @@ class PostDetailsView extends Component {
         <div className='row'>
           <div className='col-12'>
             <h3>Post Details</h3>
-            <AsyncLoader
+            <PostList
               isLoading={isFetching}
               isSuccess={this.hasSuccesfullyFetched()}
               isError={this.hasFetchedWithError()}
-              errorMessage='There was an error while retrieving the details for this post!'>
-              {posts.length > 0
-                ? posts.map(post => (
-                  <Post
-                    key={post.id}
-                    post={post}
-                    showComments={true} />
-                ))
-                : <h5 className='text text-secondary'>There is no post here! :(</h5>}
-            </AsyncLoader>
+              posts={posts}
+              showComments={true} />
           </div>
         </div>
       </div>

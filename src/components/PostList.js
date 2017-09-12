@@ -3,7 +3,7 @@ import React from 'react';
 import AsyncLoader from './util/AsyncLoader';
 import Post from './Post';
 
-const PostList = ({ isLoading, isSuccess, isError, posts }) => (
+const PostList = ({ isLoading, isSuccess, isError, posts, showComments=false }) => (
   <div>
     <AsyncLoader
       isLoading={isLoading}
@@ -15,9 +15,10 @@ const PostList = ({ isLoading, isSuccess, isError, posts }) => (
           <Post
             key={post.id}
             post={post}
-            summarizeBody={true} />
+            summarizeBody={true}
+            showComments={showComments} />
         ))
-        : <h5 className='text text-secondary'>There are no posts in this category :(</h5>}
+        : <h5 className='text text-secondary'>There are no posts here :(</h5>}
     </AsyncLoader>
   </div>
 );

@@ -3,27 +3,36 @@ import {
   SET_FORM_MODE,
   CLEAR_FORM,
   POPULATE_FORM,
-  START_SEND_POST,
-  FINISH_SEND_POST,
-  FINISH_SEND_POST_ERROR
+  START_SEND_DATA,
+  FINISH_SEND_DATA,
+  FINISH_SEND_DATA_ERROR,
+  FORM_MODES
 } from '../actions';
 
 const initialState = {
-  formMode: 'create',
-  title: '',
-  body: '',
-  author: '',
-  category: '',
+  data: {
+    title: '',
+    body: '',
+    author: '',
+    category: ''
+  },
+  formMode: FORM_MODES.CREATE_POST,
+  fieldFormModeRules: {
+    title: [ FORM_MODES.CREATE_POST, FORM_MODES.EDIT_POST ],
+    body: Object.keys(FORM_MODES).map(mode => FORM_MODES[mode]),
+    author: [ FORM_MODES.CREATE_POST, FORM_MODES.CREATE_COMMENT ],
+    category: [ FORM_MODES.CREATE_POST ]
+  },
   isSending: false,
   isError: false
 };
 
-const postFormReducer = (state=initialState, action) => {
+const dataFormReducer = (state=initialState, action) => {
   switch (action.type) {
     case ON_FIELD_CHANGE:
       return {
         ...state,
-        [action.field]: action.value
+        data: { ...state.data, [action.field]: action.value }
       };
     case SET_FORM_MODE:
       return {
@@ -33,28 +42,20 @@ const postFormReducer = (state=initialState, action) => {
     case CLEAR_FORM:
       return {
         ...state,
-        title: '',
-        body: '',
-        category: '',
-        author: ''
+        data: { title: '', body: '', category: '', author: '' }
       };
     case POPULATE_FORM:
-      const { id, title, body, author, category } = action.post;
       return {
         ...state,
-        id,
-        title,
-        body,
-        author,
-        category
+        data: action.data
       };
-    case START_SEND_POST:
+    case START_SEND_DATA:
       return {
         ...state,
         isSending: true,
         isError: false
       };
-    case FINISH_SEND_POST:
+    case FINISH_SEND_DATA:
       return {
         ...state,
         isSending: false,
@@ -62,7 +63,7 @@ const postFormReducer = (state=initialState, action) => {
         result: action.result,
         finishedAt: action.finishedAt
       };
-    case FINISH_SEND_POST_ERROR:
+    case FINISH_SEND_DATA_ERROR:
       return {
         ...state,
         isSending: false,
@@ -75,4 +76,4 @@ const postFormReducer = (state=initialState, action) => {
   }
 };
 
-export default postFormReducer;
+export default dataFormReducer;

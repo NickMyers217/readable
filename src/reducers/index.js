@@ -2,12 +2,12 @@ import {combineReducers} from 'redux';
 
 import postsReducer from './posts';
 import categoriesReducer from './categories';
-import postFormReducer from './postForm';
+import dataFormReducer from './dataForm';
 
 const rootReducer = combineReducers({
   postsList: postsReducer,
   categoriesList: categoriesReducer,
-  postForm: postFormReducer
+  dataForm: dataFormReducer
 });
 
 export default rootReducer;

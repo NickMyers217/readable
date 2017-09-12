@@ -7,7 +7,7 @@ import * as uuid from 'uuid';
  * @param {String} author 
  * @param {String} category 
  */
-const Post = function (title, body, author, category) {
+export const Post = function (title, body, author, category) {
   this.id = `${uuid()}`;
   this.timestamp = Date.now();
   this.title = title;
@@ -18,4 +18,19 @@ const Post = function (title, body, author, category) {
   this.deleted = false;
 };
 
-export default Post;
+/**
+ * A constructor function for a Comment object
+ * @param {String} parentId 
+ * @param {String} body 
+ * @param {String} author 
+ */
+export const Comment = function (parentId, body, author) {
+  this.parentId = parentId;
+  this.id = `${uuid()}`;
+  this.timestamp = Date.now();
+  this.body = body;
+  this.author = author;
+  this.voteScore = 0;
+  this.deleted = false;
+  this.parentDeleted = false;
+};

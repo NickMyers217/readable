@@ -2,7 +2,7 @@ import React from 'react';
 
 import Card from './util/Card';
 import Timestamp from './util/Timestamp';
-import CommentActions from './CommentActions';
+import CommentActionsContainer from '../containers/CommentActions';
 
 const CommentCard = ({ comment }) => (
   <Card
@@ -12,7 +12,7 @@ const CommentCard = ({ comment }) => (
         Submitted by {comment.author} at <Timestamp time={comment.timestamp} />
       </span>
     }>
-    <CommentActions comment={comment} />
+    <CommentActionsContainer data={comment} voterTop={20} />
   </Card>
 );
 
