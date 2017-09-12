@@ -4,11 +4,14 @@ import {
   REQUEST_POSTS,
   RECIEVE_POSTS,
   REQUEST_POSTS_ERROR,
+  UPDATE_CATEGORY_AND_TITLE,
+  APPLY_NEW_SORTING,
   ADD_POST_TO_LIST,
   EDIT_POST_IN_LIST,
   DELETE_POST,
-  UPDATE_CATEGORY_AND_TITLE,
-  APPLY_NEW_SORTING
+  ADD_COMMENT_TO_LIST,
+  EDIT_COMMENT_IN_LIST,
+  DELETE_COMMENT
 } from '../actions';
 
 // This state will drive the sorting widget on the posts list
@@ -63,10 +66,7 @@ const initialPostsState = {
 const postsReducer = (state = initialPostsState, action) => {
   switch (action.type) {
     case REQUEST_POSTS:
-      return {
-        ...state,
-        isFetching: true
-      };
+      return { ...state, isFetching: true };
     case RECIEVE_POSTS:
       return {
         ...state,
@@ -83,6 +83,20 @@ const postsReducer = (state = initialPostsState, action) => {
         isError: true,
         error: action.error,
         erroredAt: action.erroredAt
+      };
+    case UPDATE_CATEGORY_AND_TITLE:
+      return {
+        ...state,
+        category: action.category,
+        title: action.title
+      };
+    case APPLY_NEW_SORTING:
+      let sortedPosts = [].concat(state.posts);
+      sortedPosts.sort(state.availableSortings[action.sorting].sortFn);
+      return {
+        ...state,
+        selectedSort: action.sorting,
+        posts: sortedPosts
       };
     case ADD_POST_TO_LIST:
       let newPosts = state.posts.concat([action.post]);
@@ -104,22 +118,44 @@ const postsReducer = (state = initialPostsState, action) => {
       return {
         ...state,
         posts: state.posts.map(post => (
-          post.id === action.postId ? { ...post, deleted: true } : post
+          post.id === action.post.id ? { ...post, deleted: true } : post
         ))
       };
-    case UPDATE_CATEGORY_AND_TITLE:
+    case ADD_COMMENT_TO_LIST:
       return {
         ...state,
-        category: action.category,
-        title: action.title
+        posts: state.posts.map(post => (
+          post.id === action.comment.parentId
+            ? {
+              ...post,
+              comments: post.comments.concat([action.comment])
+            }
+            : post
+        ))
       };
-    case APPLY_NEW_SORTING:
-      let sortedPosts = [].concat(state.posts);
-      sortedPosts.sort(state.availableSortings[action.sorting].sortFn);
+    case EDIT_COMMENT_IN_LIST:
       return {
         ...state,
-        selectedSort: action.sorting,
-        posts: sortedPosts
+        posts: state.posts.map(post => (
+          post.id === action.comment.parentId
+            ? {
+              ...post,
+              comments: post.comments.map(c => c.id === action.comment.id ? action.comment : c)
+            }
+            : post
+        ))
+      };
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map(post => (
+          post.id === action.comment.parentId
+            ? {
+              ...post,
+              comments: post.comments.map(c => c.id === action.comment.id ? { ...action.comment, deleted: true } : c)
+            }
+            : post
+        ))
       };
     default:
       return state;

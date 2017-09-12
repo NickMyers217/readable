@@ -38,8 +38,8 @@ export const addNewPost = post => {
   });
 };
 
-export const deletePost = postId => {
-  const endpoint = buildUrl(`/posts/${postId}`);
+export const deletePost = post => {
+  const endpoint = buildUrl(`/posts/${post.id}`);
   return fetch(endpoint, {
     method: 'DELETE',
     headers
@@ -75,8 +75,8 @@ export const addNewComment = comment => {
   });
 };
 
-export const deleteComment = commentId => {
-  const endpoint = buildUrl(`/comments/${commentId}`);
+export const deleteComment = comment => {
+  const endpoint = buildUrl(`/comments/${comment.id}`);
   return fetch(endpoint, {
     method: 'DELETE',
     headers

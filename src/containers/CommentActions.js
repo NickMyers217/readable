@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Actions from '../components/Actions';
-import { setFormMode, FORM_MODES, populateForm } from '../actions';
+import { setFormMode, FORM_MODES, populateForm, deleteCommentServer } from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
   data: ownProps.data,
@@ -14,9 +14,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setFormMode(FORM_MODES.EDIT_COMMENT));
     dispatch(populateForm(comment));
   },
-  deleteData: commentId => {
-    // TODO: delete a comment on the server
-    // dispatch(deleteCommentServer(commentId));
+  deleteData: comment => {
+    dispatch(deleteCommentServer(comment));
   }
 });
 

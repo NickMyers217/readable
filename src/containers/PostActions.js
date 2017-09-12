@@ -13,8 +13,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setFormMode(FORM_MODES.EDIT_POST));
     dispatch(populateForm(post));
   },
-  deleteData: postId => {
-    dispatch(deletePostServer(postId));
+  deleteData: post => {
+    dispatch(deletePostServer(post));
   }
 });
 

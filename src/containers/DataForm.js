@@ -10,7 +10,9 @@ import {
   editPostInList,
   clearForm,
   addNewComment,
+  addCommentToList,
   editComment,
+  editCommentInList,
   FORM_MODES
 } from '../actions';
 
@@ -46,12 +48,12 @@ const mapDispatchToProps = dispatch => ({
   },
   addNewComment: (parentId, body, author) => {
     dispatch(addNewComment(parentId, body, author))
-      .then(({ result }) => console.log(result))
+      .then(({ result }) => dispatch(addCommentToList(result)))
       .then(closeModal);
   },
   editComment: (id, body) => {
     dispatch(editComment(id, body))
-      .then(({ result }) => console.log(result))
+      .then(({ result }) => dispatch(editCommentInList(result)))
       .then(closeModal);
   },
   onFieldChange: (field, value) => {

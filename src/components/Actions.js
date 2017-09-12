@@ -12,7 +12,7 @@ const Actions = ({ data, populateFormForEditing, deleteData, voterTop=0 }) => (
       onClick={() => populateFormForEditing(data)} />
     <DeleteButton
       tooltip='Delete'
-      onClick={() => {if (window.confirm('Are you sure you want to delete this?')) { deleteData(data.id) }}} />
+      onClick={() => {if (window.confirm('Are you sure you want to delete this?')) { deleteData(data) }}} />
   </div>
 );
 
