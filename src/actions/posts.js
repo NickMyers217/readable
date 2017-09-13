@@ -41,12 +41,12 @@ export const applyNewSorting = sorting => ({
 
 export const addPostToList = post => ({
   type: ADD_POST_TO_LIST,
-  post: { ...post, comments: [] }
+  post: { ...post, comments: post.comments || [] }
 });
 
 export const editPostInList = post => ({
   type: EDIT_POST_IN_LIST,
-  post: { ...post, comments: [] }
+  post: { ...post, comments: post.comments || [] }
 });
 
 export const deletePostInList = post => ({
