@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Posts from '../components/Posts';
+import Posts from '../components/posts/Posts';
 import { setFormMode, FORM_MODES, clearForm, fetchAllPosts, updateCategoryAndTitle, applyNewSorting } from '../actions';
 
 const mapStateToProps = state => state.postsList;

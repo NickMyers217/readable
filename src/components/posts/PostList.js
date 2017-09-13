@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AsyncLoader from './util/AsyncLoader';
+import AsyncLoader from '../util/AsyncLoader';
 import Post from './Post';
 
 const PostList = ({ isLoading, isSuccess, isError, posts, showComments=false }) => (

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Card from './util/Card';
-import Timestamp from './util/Timestamp';
-import CommentActionsContainer from '../containers/CommentActions';
+import Card from '../util/Card';
+import Timestamp from '../util/Timestamp';
+import CommentActionsContainer from '../../containers/CommentActions';
 
 const CommentCard = ({ comment }) => (
   <Card

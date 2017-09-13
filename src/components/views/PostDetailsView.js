@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import PostList from '../PostList';
+import PostList from '../posts/PostList';
 
 class PostDetailsView extends Component {
   componentDidMount() {

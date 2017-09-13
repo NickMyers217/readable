@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PostCard from './PostCard';
-import CommentsContainer from '../containers/Comments';
+import CommentsContainer from '../../containers/Comments';
 
 const Post = ({ post, summarizeBody=false, showComments=false }) => (
   <div>

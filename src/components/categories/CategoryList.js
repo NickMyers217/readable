@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import AsyncLoader from './util/AsyncLoader';
+import AsyncLoader from '../util/AsyncLoader';
 
 const CategoryLink = ({ name, path, clickFn }) => (
   <Link to={path} onClick={() => clickFn(name, `Posts for ${name}`)}>

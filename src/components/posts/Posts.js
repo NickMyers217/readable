@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 import PostList from './PostList';
-import SortingMenu from './SortingMenu';
-import { CreateButton } from './util/Buttons';
-import Modal from './util/Modal';
-import DataFormContainer from '../containers/DataForm';
+import SortingMenu from '../SortingMenu';
+import { CreateButton } from '../util/Buttons';
+import Modal from '../util/Modal';
+import DataFormContainer from '../../containers/DataForm';
 
 class Posts extends Component {
   componentDidMount() {

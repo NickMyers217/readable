@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { CreateButton } from './util/Buttons';
-import Modal from './util/Modal';
-import DataFormContainer from '../containers/DataForm';
+import { CreateButton } from '../util/Buttons';
+import Modal from '../util/Modal';
+import DataFormContainer from '../../containers/DataForm';
 import CommentList from './CommentList';
 
 const Comments = ({ postId, comments=[], setupForm }) => (

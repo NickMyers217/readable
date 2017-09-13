@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Comments from '../components/Comments';
+import Comments from '../components/comments/Comments';
 import { setFormMode, FORM_MODES, clearForm } from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({

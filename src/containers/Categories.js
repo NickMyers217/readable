@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Categories from '../components/Categories';
+import Categories from '../components/categories/Categories';
 import {
   fetchAllCategories,
   fetchAllPosts,

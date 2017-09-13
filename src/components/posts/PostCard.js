@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Card from './util/Card';
-import Timestamp from './util/Timestamp';
-import PostActionsContainer from '../containers/PostActions';
+import Card from '../util/Card';
+import Timestamp from '../util/Timestamp';
+import PostActionsContainer from '../../containers/PostActions';
 
 const PostCard = ({ post, summarizeBody }) => (
   <Card
