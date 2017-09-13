@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Actions from '../components/Actions';
-import { setFormMode, FORM_MODES, populateForm, deletePostServer } from '../actions';
+import { setFormMode, FORM_MODES, populateForm, deletePost, votePost } from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
   data: ownProps.data
@@ -14,7 +14,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(populateForm(post));
   },
   deleteData: post => {
-    dispatch(deletePostServer(post));
+    dispatch(deletePost(post));
+  },
+  onVote: (post, isUpvote) => {
+    dispatch(votePost(post, isUpvote));
   }
 });
 

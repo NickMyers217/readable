@@ -3,9 +3,13 @@ import React from 'react';
 import { EditButton, DeleteButton } from './util/Buttons';
 import Voter from './Voter';
 
-const Actions = ({ data, populateFormForEditing, deleteData, voterTop=0 }) => (
+const Actions = ({ data, populateFormForEditing, deleteData, onVote, voterTop=0 }) => (
   <div>
-    <Voter score={data.voteScore} top={voterTop} />
+    <Voter
+      score={data.voteScore}
+      top={voterTop}
+      onUpvote={() => onVote(data, true)}
+      onDownvote={() => onVote(data, false)} />
     <EditButton
       tooltip='Edit'
       modalId='postAndCommentModal'

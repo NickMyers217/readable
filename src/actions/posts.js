@@ -7,10 +7,10 @@ export const UPDATE_CATEGORY_AND_TITLE = 'UPDATE_CATEGORY_AND_TITLE';
 export const APPLY_NEW_SORTING = 'APPLY_NEW_SORTING';
 export const ADD_POST_TO_LIST = 'ADD_POST_TO_LIST';
 export const EDIT_POST_IN_LIST = 'EDIT_POST_IN_LIST';
-export const DELETE_POST = 'DELETE_POST';
+export const DELETE_POST_IN_LIST = 'DELETE_POST_IN_LIST';
 export const ADD_COMMENT_TO_LIST = 'ADD_COMMENT_TO_LIST';
 export const EDIT_COMMENT_IN_LIST = 'EDIT_COMMENT_IN_LIST';
-export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const DELETE_COMMENT_IN_LIST = 'DELETE_COMMENT_IN_LIST';
 
 export const requestPosts = () => ({
   type: REQUEST_POSTS
@@ -49,8 +49,8 @@ export const editPostInList = post => ({
   post: { ...post, comments: [] }
 });
 
-export const deletePost = post => ({
-  type: DELETE_POST,
+export const deletePostInList = post => ({
+  type: DELETE_POST_IN_LIST,
   post
 });
 
@@ -64,18 +64,15 @@ export const editCommentInList = comment => ({
   comment
 });
 
-export const deleteComment = comment => ({
-  type: DELETE_COMMENT,
+export const deleteCommentInList = comment => ({
+  type: DELETE_COMMENT_IN_LIST,
   comment
 });
 
 const fetchPostCommentsAndAddToPost = post => {
   return api.fetchPostComments(post.id)
     .then(res => res.json())
-    .then(comments => ({
-      ...post,
-      comments
-    }));
+    .then(comments => ({ ...post, comments }));
 };
 
 export const fetchSinglePost = postId => dispatch => {
@@ -100,14 +97,28 @@ export const fetchAllPosts = category => dispatch => {
     .catch(err => dispatch(requestPostsError(err)));
 };
 
-export const deletePostServer = post => dispatch => {
+export const deletePost = post => dispatch => {
   return api.deletePost(post)
-    .then(() => dispatch(deletePost(post)))
+    .then(() => dispatch(deletePostInList(post)))
     .catch(console.log);
 };
 
-export const deleteCommentServer = comment => dispatch => {
+export const deleteComment = comment => dispatch => {
   return api.deleteComment(comment)
-    .then(() => dispatch(deleteComment(comment)))
+    .then(() => dispatch(deleteCommentInList(comment)))
+    .catch(console.log);
+};
+
+export const votePost = (post, isUpvote) => dispatch => {
+  const voteScore = isUpvote ? post.voteScore + 1 : post.voteScore - 1;
+  return api.votePost(post.id, isUpvote)
+    .then(() => dispatch(editPostInList({ ...post, voteScore })))
+    .catch(console.log);
+};
+
+export const voteComment = (comment, isUpvote) => dispatch => {
+  const voteScore = isUpvote ? comment.voteScore + 1 : comment.voteScore - 1;
+  return api.voteComment(comment.id, isUpvote)
+    .then(() => dispatch(editCommentInList({ ...comment, voteScore })))
     .catch(console.log);
 };

@@ -55,17 +55,6 @@ export const editPost = (id, title, body) => {
   });
 };
 
-export const votePost = (postId, isUpvote) => {
-  const endpoint = buildUrl(`/posts/${postId}`);
-  return fetch(endpoint, {
-    method: 'POST',
-    body: JSON.stringify({
-      option: isUpvote ? 'upVote' : 'downVote'
-    }),
-    headers: { ...headers, 'Content-Type': 'application/json' }
-  });
-};
-
 export const addNewComment = comment => {
   const endpoint = buildUrl('/comments');
   return fetch(endpoint, {
@@ -88,6 +77,17 @@ export const editComment = (id, body) => {
   return fetch(endpoint, {
     method: 'PUT',
     body: JSON.stringify({ body, timestamp: Date.now() }),
+    headers: { ...headers, 'Content-Type': 'application/json' }
+  });
+};
+
+export const votePost = (postId, isUpvote) => {
+  const endpoint = buildUrl(`/posts/${postId}`);
+  return fetch(endpoint, {
+    method: 'POST',
+    body: JSON.stringify({
+      option: isUpvote ? 'upVote' : 'downVote'
+    }),
     headers: { ...headers, 'Content-Type': 'application/json' }
   });
 };

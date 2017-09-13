@@ -8,10 +8,10 @@ import {
   APPLY_NEW_SORTING,
   ADD_POST_TO_LIST,
   EDIT_POST_IN_LIST,
-  DELETE_POST,
+  DELETE_POST_IN_LIST,
   ADD_COMMENT_TO_LIST,
   EDIT_COMMENT_IN_LIST,
-  DELETE_COMMENT
+  DELETE_COMMENT_IN_LIST
 } from '../actions';
 
 // This state will drive the sorting widget on the posts list
@@ -63,100 +63,95 @@ const initialPostsState = {
   posts: []
 };
 
+const reducePosts = (state, reduceFn) => {
+  // The list of posts should observe the currently set sort
+  let newPosts = reduceFn(state.posts);
+  newPosts.sort(state.availableSortings[state.selectedSort].sortFn);
+  return { ...state, posts: newPosts };
+};
+
+const mapPosts = (state, fn) => {
+  return reducePosts(state, posts => posts.map(fn));
+};
+
+const mapSpecificPost = (state, postId, fn) => {
+  return mapPosts(state, post => (
+    post.id === postId ? fn(post) : post
+  ));
+};
+
+const reduceComments = (state, postId, reduceFn) => {
+  return mapSpecificPost(state, postId, post => {
+    // Comments are always sorted by highest score
+    let newComments = reduceFn(post.comments);
+    newComments.sort(state.availableSortings.highestScore.sortFn);
+    return {
+      ...post,
+      comments: newComments
+    };
+  });
+};
+
+const mapComments = (state, postId, fn) => {
+  return reduceComments(state, postId, comments => comments.map(fn));
+};
+
+const mapSpecificComment = (state, postId, commentId, fn) => {
+  return mapComments(state, postId, comment => (
+    comment.id === commentId ? fn(comment) : comment
+  ));
+};
+
 const postsReducer = (state = initialPostsState, action) => {
   switch (action.type) {
     case REQUEST_POSTS:
       return { ...state, isFetching: true };
+
     case RECIEVE_POSTS:
-      return {
-        ...state,
-        isFetching: false,
-        isError: false,
-        // The list of posts should observe the currently set sort
-        posts: action.posts.sort(state.availableSortings[state.selectedSort].sortFn),
-        lastUpdated: action.recievedAt
-      };
+      const newState = { ...state, isFetching: false, isError: false, lastUpdated: action.recievedAt, posts: [] };
+      return reducePosts(newState, posts => (
+        action.posts.map(post => {
+          let newComments = [].concat(post.comments);
+          newComments.sort(state.availableSortings.highestScore.sortFn);
+          return { ...post, comments: newComments };
+        })
+      ));
+
     case REQUEST_POSTS_ERROR:
-      return {
-        ...state,
-        isFetching: false,
-        isError: true,
-        error: action.error,
-        erroredAt: action.erroredAt
-      };
+      return { ...state, isFetching: false, isError: true, error: action.error, erroredAt: action.erroredAt };
+
     case UPDATE_CATEGORY_AND_TITLE:
-      return {
-        ...state,
-        category: action.category,
-        title: action.title
-      };
+      return { ...state, category: action.category, title: action.title };
+
     case APPLY_NEW_SORTING:
-      let sortedPosts = [].concat(state.posts);
-      sortedPosts.sort(state.availableSortings[action.sorting].sortFn);
-      return {
-        ...state,
-        selectedSort: action.sorting,
-        posts: sortedPosts
-      };
+      return reducePosts({ ...state, selectedSort: action.sorting }, posts => posts);
+
     case ADD_POST_TO_LIST:
-      let newPosts = state.posts.concat([action.post]);
-      newPosts.sort(state.availableSortings[state.selectedSort].sortFn);
-      return {
-        ...state,
-        posts: state.category !== null
-          ? newPosts.filter(({ category }) => category === state.category)
-          : newPosts
-      };
+      return reducePosts(state, posts => (
+        // Only add the post if it is in the current category
+        action.post.category === state.category || state.category === null
+          ? posts.concat([action.post])
+          : posts
+      ));
+
     case EDIT_POST_IN_LIST:
-      return {
-        ...state,
-        posts: state.posts.map(post => (
-          post.id === action.post.id ? action.post : post
-        ))
-      };
-    case DELETE_POST:
-      return {
-        ...state,
-        posts: state.posts.map(post => (
-          post.id === action.post.id ? { ...post, deleted: true } : post
-        ))
-      };
+      return mapSpecificPost(state, action.post.id, post => action.post);
+
+    case DELETE_POST_IN_LIST:
+      return mapSpecificPost(state, action.post.id, post => ({ ...post, deleted: true }));
+
     case ADD_COMMENT_TO_LIST:
-      return {
-        ...state,
-        posts: state.posts.map(post => (
-          post.id === action.comment.parentId
-            ? {
-              ...post,
-              comments: post.comments.concat([action.comment])
-            }
-            : post
-        ))
-      };
+      return reduceComments(state, action.comment.parentId, comments => comments.concat([action.comment]));
+
     case EDIT_COMMENT_IN_LIST:
-      return {
-        ...state,
-        posts: state.posts.map(post => (
-          post.id === action.comment.parentId
-            ? {
-              ...post,
-              comments: post.comments.map(c => c.id === action.comment.id ? action.comment : c)
-            }
-            : post
-        ))
-      };
-    case DELETE_COMMENT:
-      return {
-        ...state,
-        posts: state.posts.map(post => (
-          post.id === action.comment.parentId
-            ? {
-              ...post,
-              comments: post.comments.map(c => c.id === action.comment.id ? { ...action.comment, deleted: true } : c)
-            }
-            : post
-        ))
-      };
+      return mapSpecificComment(state, action.comment.parentId, action.comment.id, comment => action.comment);
+
+    case DELETE_COMMENT_IN_LIST:
+      return mapSpecificComment(state, action.comment.parentId, action.comment.id, comment => ({
+        ...action.comment,
+        deleted: true
+      }));
+
     default:
       return state;
   }
