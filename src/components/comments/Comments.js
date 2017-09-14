@@ -22,7 +22,7 @@ const Comments = ({ postId, comments=[], setupForm }) => (
         </ul>
       </div>
     </div>
-    <CommentList comments={comments.filter(c => !c.deleted)} />
+    <CommentList comments={comments} />
   </div>
 );
 

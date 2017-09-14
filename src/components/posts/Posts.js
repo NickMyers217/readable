@@ -53,7 +53,7 @@ class Posts extends Component {
             isSuccess={this.hasSuccesfullyFetched()}
             isError={this.hasFetchedWithError()}
             isLoading={isFetching}
-            posts={posts.filter(({ deleted }) => !deleted)} />
+            posts={posts} />
         </div>
       </div>
     );

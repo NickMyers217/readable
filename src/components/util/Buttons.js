@@ -2,6 +2,7 @@ import React from 'react';
 import IoIosPlusOutline from 'react-icons/lib/io/ios-plus-outline';
 import IoAndroidDelete from 'react-icons/lib/io/android-delete';
 import IoAndroidCreate from 'react-icons/lib/io/android-create';
+import IoAndroidArrowBack from 'react-icons/lib/io/android-arrow-back';
 
 const Button = ({ type, tooltip, children, modalId, marginRight=0, marginLeft=0, onClick=() => {} }) => (
   <button
@@ -15,6 +16,12 @@ const Button = ({ type, tooltip, children, modalId, marginRight=0, marginLeft=0,
     onClick={(e) => onClick()}>
     {children}
   </button>
+);
+
+export const BackButton = () => (
+  <Button type='primary' tooltip='Go back'>
+    <IoAndroidArrowBack size={25} />
+  </Button>
 );
 
 export const EditButton = ({ size=25, tooltip, modalId, onClick }) => (

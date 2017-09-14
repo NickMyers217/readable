@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
+import { BackButton } from '../util/Buttons';
 import PostList from '../posts/PostList';
 
 class PostDetailsView extends Component {
@@ -25,7 +27,12 @@ class PostDetailsView extends Component {
       <div className='container' style={{ paddingTop: '15px' }}>
         <div className='row'>
           <div className='col-12'>
-            <h3>Post Details</h3>
+            <h3>
+              <Link to='/'>
+                <BackButton />
+              </Link>
+              <span className='ml-2'>Post Details</span>
+            </h3>
             <PostList
               isLoading={isFetching}
               isSuccess={this.hasSuccesfullyFetched()}
